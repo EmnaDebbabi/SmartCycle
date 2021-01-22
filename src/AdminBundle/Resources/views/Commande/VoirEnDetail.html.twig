@@ -1,0 +1,34 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+<div class="bs-example widget-shadow" data-example-id="hoverable-table">
+    <h4>Detail du Commande:</h4>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Numéro </th>
+            <th>Description</th>
+            <th>Quantité</th>
+            <th>Prix Unitaire</th>
+            <th>Totale</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set f= 1 %}
+    {% for p in panier  %}
+        <tr>
+            <th scope="row">{{ f }}</th>
+            <td>{{ p.idStock.description }}</td>
+            <td> {{  p.quantite  }}</td>
+            <td>       {{   p.idStock.prixuni }}</td>
+            <td>      {{ p.total }}</td>
+            {% set f=f+1 %}
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
+    <button>  <a href="{{ path('Commandes') }}"> Retour au commande </a> </button>
+{% endblock %}

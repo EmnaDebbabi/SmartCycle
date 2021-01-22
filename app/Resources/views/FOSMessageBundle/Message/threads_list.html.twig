@@ -1,0 +1,80 @@
+<table class="timetable_sub">
+    <thead>
+    <tr>
+        <th>{% trans from 'FOSMessageBundle' %}Sujet{% endtrans %}</th>
+        <th>{% trans from 'FOSMessageBundle' %}Démarreur{% endtrans %}</th>
+        <th>{% trans from 'FOSMessageBundle' %}
+            Date de début{% endtrans %}</th>
+        <th>{% trans from 'FOSMessageBundle' %}Messages{% endtrans %}</th>
+        <th>{% trans from 'FOSMessageBundle' %}Dernier message{% endtrans %}</th>
+        <th>{% trans from 'FOSMessageBundle' %}Actions{% endtrans %}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if threads %}
+    {% for thread in threads %}
+
+
+        <tr class="rem1">
+            <td class="invert">
+                <a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}">
+                    {{ thread.subject }}
+                </a>
+
+                {% if not fos_message_is_read(thread) %}
+                    ({% trans from 'FOSMessageBundle' %} <h5 class="clr">  new</h5>{% endtrans %})
+                {% endif %}
+
+            </td>
+
+            <td class="invert">
+                <h5 class="clr">     {{ thread.createdBy }}
+
+                </h5>  </td>
+              <td class="invert"> <h5 class="clr">{{ thread.createdAt|date }}</h5></td>
+            <td class="invert-image">
+                <h5 class="clr">{{ thread.messages|length }}</h5>
+            </td>
+            <td class="invert">
+                {% if thread.lastMessage %}
+                <h5 class="clr">
+                    <a href="{{ url('thread_Event', {'threadId': thread.id}) }}#message_{{ thread.lastMessage.id }}" title="{% trans from 'FOSMessageBundle' %}goto_last{% endtrans %}">
+                        →
+                    </a>
+                    {% trans with {'%date%': thread.lastMessage.createdAt|date} from 'FOSMessageBundle' %}on{% endtrans %}
+                    <br />
+                    {% trans with {'%sender%': thread.lastMessage.sender|e } from 'FOSMessageBundle' %}by{% endtrans %}
+                    </h5>
+                {% else %}
+                    ----
+                {% endif %}
+            </td>
+            <td class="invert">
+                <h5 class="clr">
+                {% if fos_message_can_delete_thread(thread) %}
+                    {% if fos_message_deleted_by_participant(thread) %}
+                        {% set formAction %}{{ url('undelete_Event', {'threadId': thread.id}) }}{% endset %}
+                        {% set submitValue %}{% trans from 'FOSMessageBundle' %}undelete{% endtrans %}{% endset %}
+                    {% else %}
+                        {% set formAction %}{{ url('delete_Event', {'threadId': thread.id}) }}{% endset %}
+                        {% set submitValue %}{% trans from 'FOSMessageBundle' %}delete{% endtrans %}{% endset %}
+                    {% endif %}
+                    <form action="{{ formAction }}" method="post">
+                        <input type="submit" value="{{ submitValue }}" />
+                    </form>
+                {% endif %}
+                </h5>
+            </td>
+
+        </tr>
+    {% endfor %}
+    {% else %}
+        <tr>
+            <h5 class="clr"> <td colspan="6">
+                {% trans from 'FOSMessageBundle' %}no_thread{% endtrans %}.
+            </td>
+            </h5>  </tr>
+    {% endif %}
+
+    </tbody>
+</table>

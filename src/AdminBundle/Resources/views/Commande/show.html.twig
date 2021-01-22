@@ -1,0 +1,75 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+
+
+    <div class="bs-example widget-shadow" data-example-id="contextual-table">
+        <h3> Les Commandes :</h3>
+        <table class="table">
+            <thead>
+            <tr >
+                <th>Numéro Commande </th>
+                <th>Client </th>
+                <th>Total (DT) </th>
+                <th>Date de commande </th>
+                <th>date d'expiration</th>
+                <th>Détail </th>
+                <th>Etat </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set i =0 %}
+            {% for c in commandes  %}
+
+
+                    {% if  c.dateexp < datej  %}
+                    <tr class="danger">
+
+                        <th >{{ c.idCmd }}</th>
+                        <th >{{ c.idUser.nom}} {{ c.idUser.prenom}}</th>
+                        <th>{{ c.total }}</th>
+                        <th>{{ c.date|date('d-m-Y') }}</th>
+                        <th>{{ c.dateexp|date('d-m-Y') }}</th>
+                        <th> <a href="{{ path('Endetail',{'idCmd':c.idCmd })}}"> Voir En Detail  </a></th>
+                        <th>expiréé</th>
+
+
+                    </tr>
+                    {% elseif c.payement=='paye' %}
+                        <tr class="info">
+
+                            <th >{{ c.idCmd }}</th>
+                            <th >{{ c.idUser.nom}} {{ c.idUser.prenom}}</th>
+                            <th>{{ c.total }}</th>
+                            <th>{{ c.date|date('d-m-Y') }}</th>
+                            <th>{{ c.dateexp|date('d-m-Y') }}</th>
+                            <th> <a href="{{ path('Endetail',{'idCmd':c.idCmd })}}"> Voir En Detail  </a></th>
+                            <th>payé</th>
+
+                        </tr>
+
+                {% else %}
+
+                    <tr class="success">
+                        <th >{{ c.idCmd }}</th>
+                        <th >{{ c.idUser.nom}} {{ c.idUser.prenom}}</th>
+                        <th>{{ c.total }}</th>
+                        <th>{{ c.date |date('d-m-Y')}}</th>
+                        <th>{{ c.dateexp |date('d-m-Y') }}</th>
+                        <th> <a href="{{ path('Endetail',{'idCmd':c.idCmd })}}"> Voir En Detail  </a></th>
+                        <th>non payé </th>
+                    </tr>
+
+                {% endif %}
+
+            {% endfor %}
+            <tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+
+    <div class="bs-example widget-shadow" data-example-id="contextual-table">
+        <h3> Tous les événements:</h3>
+        <table class="table">
+            <thead>
+            <tr >
+                <th>Nom de participant</th>
+                <th>Nom d'événement</th>
+                <th>Etat</th>
+                <th>Avis</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set i =0 %}
+            {% for e in avis  %}
+                {% if i % 2 == 1 %}
+                    {% set i=i+1 %}
+                    <tr class="info">
+
+                        <th >{{ e.idm.nom }}</th>
+                        <th >{{ e.idevent.nom }}</th>
+                        <th >{{ e.etat }}</th>
+                        <th >{{ e.avis }}</th>
+
+                    </tr>
+                {% else %}
+                    {% set i=i+1 %}
+            <tr class="success">
+                    <th >{{ e.idm.nom }}</th>
+                    <th >{{ e.idevent.nom }}</th>
+                    <th >{{ e.etat }}</th>
+                    <th >{{ e.avis }}</th>
+                {% endif %}
+            {% endfor %}
+            <tr>
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

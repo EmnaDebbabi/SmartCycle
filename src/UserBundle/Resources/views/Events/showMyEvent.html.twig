@@ -1,0 +1,148 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="index.html">Mes Evénements</a>
+                    <span>/ /</span>
+                </li>
+                <li>afficher</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+    <div style="background-color: #30ffaa">
+        <p style="color: white">{{ MessageEvent }}</p>
+    </div>
+    <div style="background-color: red">
+        <p style="color: white">{{ Message1 }}</p>
+
+    </div>
+
+    </div>
+
+    <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <div class="shop_inner_inf">
+                <div class="privacy about">
+                    <div class="checkout-right-basket">
+
+
+
+
+                        <a href="{{ path("add_Event")}}">Ajouter un nouveau événement </a>
+                    </div>
+                    <h3>Mes<span>Evénements</span></h3>
+
+                    <div class="checkout-right">
+                        <h4>Mes événements contiennent: <span>{{ nb }} événement(s)</span></h4>
+                        <table class="timetable_sub">
+                            <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>type</th>
+                                <th>date</th>
+                                <th>lieu</th>
+                                <th>description</th>
+                                <th>heure</th>
+                                <th>Image</th>
+                                <th>Remove</th>
+                                <th>Update</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if events|length == 0 %}
+                                <tr>
+                                    <h1> <td colspan="7"><center>Vous avez aucun événement!</center></td></h1>
+                                </tr>
+                            {% endif %}
+    {% for event in events  %}
+                            <tr class="rem1">
+                                <td class="invert">{{ event.nom }}</td>
+
+                                <td class="invert">{{ event.type }}</td>
+                                <td class="invert">{{event.date|date("m/d/y") }}</td>
+                                <td class="invert">{{ event.lieu }}</td>
+                                <td class="invert">{{ event.description }}</td>
+                                <td class="invert">{{ event.heure }}</td>
+                                <td class="invert-image"><a href="single.html"><img src="{{ asset('imagesEvent/') }}{{ event.nomImage }} " style="width: 260px;height: 240px" alt=" " class="img-responsive"></a></td>
+                                <td class="invert">
+                                    <div class="rem">
+                                        <a href="{{ path("remove_MyEvent",{'id':event.id})}}" >
+                                        <div class="close1"> </div>
+                                     </a>
+                                    </div>
+                                </td>
+                                <td class="invert">
+                                    <a href="{{ path("update_MyEvent",{'id':event.id})}}" >
+                                    <div class="quantity">
+                                        <div class="quantity-select">
+                                            <div class="entry value-plus active">&nbsp;</div>
+                                        </div>
+                                    </div>
+                                    </a>
+                                </td>
+
+                            </tr>
+    {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="checkout-left">
+
+
+                        <div class="clearfix"> </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- //top products -->
+        </div>
+        {#<h2> Search a Post!</h2>#}
+
+        {#<div class="search-hotel">#}
+            {#<div class="agileits-sear-head">#}
+                {#<input type="text" id="search" class="form-control" placeholder="search here">#}
+            {#</div>#}
+        {#</div>#}
+        {#<ul class="nav" id="side-menu">#}
+            {#<li>#}
+                {#<a href="#">Search Results<span class="fa arrow"></span></a>#}
+            {#</li>#}
+        {#</ul>#}
+
+
+    </section>
+{% endblock %}
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}

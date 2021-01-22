@@ -1,0 +1,5 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="{{ asset('notif/lobibox.min.css') }}"/>
+
+<script src="{{ asset('notif/lobibox.js') }}"></script>

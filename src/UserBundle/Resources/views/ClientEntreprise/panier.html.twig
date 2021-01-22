@@ -1,0 +1,144 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="{{ path('user_homepage') }}">Smart Cycle Accueil </a>
+                    <span>/ /</span>
+                </li>
+                <li>Achat</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+    <div style="background-color: #30ffaa">
+        <p style="color: white">{{ Message }}</p>
+
+    </div>
+    <div style="background-color: red">
+        <p style="color: white">{{ Message1 }}</p>
+
+    </div>
+
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <div class="shop_inner_inf">
+            <div class="privacy about">
+                <h3>Mon Panier </h3>
+                <div class="checkout-right">
+                    <h4>Le nombre de produits : <span>{{ panier|length }} Produit(s)</span></h4>
+                    <table class="timetable_sub">
+                        <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Image</th>
+                            <th>Quantité</th>
+                            <th>Prix</th>
+                            <th>Total</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% set f='' %}
+                        {% if panier|length == 0 %}
+                            <tr>
+                                <td colspan="7"><center>Aucun Produit dans votre panier</center></td>
+                            </tr>
+                        {% endif %}
+                     {% for p in panier  %}
+                        <tr class="rem1">
+                            <td class="invert"> {{ p.idStock.description }}</td>
+                            <td class="invert-image"><a > <img src="{{ asset('imagesStock/') }}{{ p.idStock.nomimage }} " style="width: 260px;height: 240px" class="img-thumbnail img-fluid" alt=""></a></td>
+                            <td class="invert">
+                             {{  p.quantite  }}
+                            </td>
+                            <td class="invert">{{   p.idStock.prixuni }}</td>
+                            <td class="invert">{{ p.total }}</td>
+                            <td class="invert">
+                                <div class="rem">
+
+
+                                        <a href="{{ path('deletelignecommande',{'id':p.id}) }}">
+                                            <i width="1000px" class="close1">
+
+                                            </i>
+                                        </a>
+
+
+
+                                </div>
+                            </td>
+                            {% set f=p.total+f %}
+                        </tr>
+
+    {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md address_form">
+                    <div class=" checkout-left-basket">
+                        <br>
+                        <h4><a href="{{ path('Stock_list') }}">Continuer mes achats </a></h4>
+                        <br>
+               {% if panier|length != 0 %}
+                        <a href="{{ path('supprimercommande')}}">Annuler ma commnade </a>
+               {% endif %}
+                    </div>
+
+                    <div class="checkout-right-basket">
+                        <ul>
+                   {% if panier|length != 0 %}
+                            <li>Total : <span>{{f }} DT</span></li>
+                        </ul>
+                        <br> <br>
+
+                        <a href="{{ path('validCommande')}}"> Valider </a>
+                       {% endif %}
+                    </div>
+
+
+                </div>
+
+                    <div class="clearfix"> </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <!-- //top products -->
+    </div>
+{% endblock %}
+
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="index.html">Ma participation</a>
+                    <span>/</span>
+                </li>
+                <li>Consulter</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+    <div style="background-color: #30ffaa">
+        <p style="color: white">
+            {{ MessageEvent2}}
+        </p>
+    </div>
+    <div style="background-color: red">
+    <p style="color: white">{{ MessageEvent1}}</p>
+
+    </div>
+
+        <!-- price range -->
+
+        <div class="range">
+
+            {#<button class="btn btn-block sent-butnn" onclick="location.href='{{ path('CodeCadeau_Event') }}'" >Votre Code cadeau</button>#}
+{#<img src="/SymfonyPi/web/imagesEvent/bravo.jpg">#}
+
+    {% if MessageEvent >= 5 and Result ==0  %}
+                <form action="#" method="Post">
+                    <div class=" agile-wls-contact-mid">
+
+                        <div class="form-group contact-forms">
+                            {#{{ form_widget(form.codecadeau,{'attr':{'class':'form-control','placeholder':"Taper votre code ici",name:"code",id:"code"}}) }}#}
+                            <input type="text" class="form-control" rows="3" placeholder="Taper votre code ici" name="search" id="search"></input>
+                        </div>
+                        <button type="submit" class="btn btn-block sent-butnn">Enregistrer</button>
+                        <br> <br> <br> <br> <br> <br><br><br><br><br><br><br><br><br>
+
+
+                    </div>
+                </form>
+                {% endif %}
+{% if Result !=0 %}
+    <button class="btn btn-block sent-butnn" onclick="location.href='{{ path('CodeCadeau_Event') }}'" >Votre Code cadeau</button>
+    <img src="/SymfonyPi/web/imagesEvent/bravo.jpg">
+            <div class="inner-men-cart-pro">
+            </div>
+            <ul class="dropdown-menu6">
+                <li>
+
+                    <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header" style="left: 0.555556%; width: 66.1111%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.555556%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 66.6667%;"></a></div>
+                    <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;">
+                </li>
+            </ul>
+        </div>
+
+        <!-- //price range -->
+
+    {% endif %}
+    {% if MessageEvent > 2 and MessageEvent < 5 %}
+        <!-- price range -->
+
+        <div class="range">
+            {#<button class="btn btn-block sent-butnn" onclick="location.href='{{ path('CodeCadeau_Event') }}'" >Votre Code cadeau</button>#}
+
+            {#<a href="{{ path('CodeCadeau_Event') }}" id="participer" class="link-product-add-cart">Votre Code cadeau</a>#}
+            <div align="center"><a href="{{ path('show_Event') }}"><img src="/SymfonyPi/web/imagesEvent/continue.jpg"></a></div>
+
+            <div class="inner-men-cart-pro">
+
+
+
+            </div>
+            <ul class="dropdown-menu6">
+                <li>
+
+                    <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header" style="left: 0.555556%; width: 66.1111%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.555556%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 66.6667%;"></a></div>
+                    <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;">
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+    {% if MessageEvent <=2 %}
+        <!-- price range -->
+
+        <div class="range">
+            {#<button class="btn btn-block sent-butnn" onclick="location.href='{{ path('CodeCadeau_Event') }}'" >Votre Code cadeau</button>#}
+
+            {#<a href="{{ path('CodeCadeau_Event') }}" id="participer" class="link-product-add-cart">Votre Code cadeau</a>#}
+            <div align="center"><a href="{{ path('show_Event') }}"><img src="/SymfonyPi/web/imagesEvent/continue.jpg"></a></div>
+
+            <div class="inner-men-cart-pro">
+
+
+
+            </div>
+            <ul class="dropdown-menu6">
+                <li>
+
+                    <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header" style="left: 0.555556%; width: 66.1111%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.555556%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 66.6667%;"></a></div>
+                    <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;">
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+    <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+{% endblock %}
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+
+{% endblock %}

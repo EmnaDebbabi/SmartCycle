@@ -1,0 +1,258 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block recherche %}
+    <div class="col-lg-5 col-md-6 search-right">
+        <form class="form-inline my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" id="search">
+            <button class="btn" type="submit" >Rechercher</button>
+        </form>
+    </div>
+    {#<div class="side-bar col-lg-3">#}
+        {#<div class="search-hotel">#}
+            {#<h3 class="agileits-sear-head">Search Here..</h3>#}
+
+            {#<input type="search" placeholder="Association name..." id="search">#}
+        {#</div>#}
+        {#<ul class="nav" id="side-menu">#}
+            {#<li>#}
+                {#<a href="#">Search results<span class="fa arrow"></span></a>#}
+                {#<ul class="nav nav" id="entitiesNav"></ul>#}
+            {#</li>#}
+
+        {#</ul>#}
+    {#</div>#}
+
+{% endblock %}
+
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="{{ path('user_homepage') }}">Smart Cycle Accueil </a>
+                    <span>/ /</span>
+                </li>
+                <li>Achat</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+
+    <div style="background-color: #30ffaa">
+        <p style="color: white">{{ Message }}</p>
+
+    </div>
+    <div style="background-color: red">
+        <p style="color: white">{{ Message1 }}</p>
+
+    </div>
+
+<style type="text/css">
+    .pagination {
+        display: inline-block;
+    }
+
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color .3s;
+        border: 1px solid #ddd;
+        margin: 0 4px;
+    }
+
+
+
+    .pagination a:hover:not(.active) {background-color: #ddd;}
+
+</style>
+
+    <section class="contact py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container-fluid py-lg-5 py-md-4 py-sm-4 py-3">
+            <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Smart Cycle Achat </h3>
+            <div class="row">
+
+                <div class="side-bar col-lg-3">
+                    <div class="search-hotel">
+                        <h3 class="agileits-sear-head">Rechercher ici..</h3>
+                        <form action="{{ path('Stock_Recherche') }}" method="get">
+                            <input name="search" placeholder="Product name..." required="" type="search" value="Search" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Search';}" class="text" id="search"/>
+                            <input type="submit" value=" ">
+                        </form>
+                    </div>
+
+
+
+                    {#<!-- //Affichage -->#}
+                </div>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+                <script type="text/javascript">
+                    jQuery(document).ready(function() {
+                        var searchRequest = null;
+                        $("#search").keyup(function() {
+                            var minlength = 1;
+                            var that = this;
+                            var value = $(this).val();
+                            var entitySelector = $("#entitiesNav").html('');
+                            if (value.length >= minlength ) {
+                                if (searchRequest != null)
+                                    searchRequest.abort();
+                                searchRequest = $.ajax({
+                                    type: "GET",
+                                    url: "{{ path('AjaxStock') }}",
+                                    data: {
+                                        'q' : value
+                                    },
+                                    dataType: "text",
+                                    success: function(msg){
+                                        //we need to check if the value is the same
+                                        if (value===$(that).val()) {
+                                            var result = JSON.parse(msg);
+                                            $.each(result, function(key, arr) {
+                                                $.each(arr, function(id, value) {
+                                                    if (key === 'posts') {
+                                                        if (id !== 'error') {
+                                                            console.log(value[1]);
+                                                            entitySelector.append(' <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">'+
+                                                                ' <div class="product-toys-info">'+
+                                                                '  <div class="men-pro-item">'+
+                                                                '  <div class="men-thumb-item">'+
+                                                                '<img src="/SymfonyPi/web/ImagesStock/'+value[0]+
+                                                                ' "style="width: 260px;height: 240px" class="img-thumbnail img-fluid" alt="">'+'<span class="product-new-top"> '+value[1]+'</span> </div>'+
+                                                                ' <div class="item-info-product">'+
+                                                               ' <div class="info-product-price">'+'  <div class="grid_meta">' +'  <div class="product_price">'+'<h4> '
+                                                                +'<a>'+value[2]+'</a>'+'</h4> '+' <div class="grid-price mt-2">'+'   <span class="money ">'+
+                                                               +value[3]+' DT / KG' +'</span>  </div>  </div> </div>'+'     <div class="toys single-item hvr-outline-out">'+
+                                                                ' <form name="form" method="POST" action="/SymfonyPi/web/app_dev.php/user/ajoutaupanier?id_cat='+id+'">'+
+                                                                '  <label> </label>'+' <button type="submit" class="toys-cart ptoys-cart"> '+
+                                                                '     <i class="fas fa-cart-plus">'+'</i> </button>'+'  <div class="grid-price mt-2">'+
+                                                                ' <span class="money ">'+'Quantité desirée'+"</span>"+
+                                                                '<input type="text" name="quantite" id="qte" required="required" >'+
+                                                                ' </div> </form>  </div>  </div>'+'<div class="clearfix">'+'</div></div></div></div></div>'
+
+
+
+                                                            );
+                                                        } else {
+                                                            entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                        }
+                                                    }
+                                                });
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    });
+                </script>
+
+
+
+
+                <div class="left-ads-display col-lg-9">
+                    <div class="row" id="entitiesNav">
+                        {% for s in stock  %}
+                            <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+
+                                <div class="product-toys-info">
+                                    <div class="men-pro-item">
+                                        <div class="men-thumb-item">
+                                            <img src="{{ asset('imagesStock/') }}{{  s.nomimage }} " style="width: 260px;height: 240px" class="img-thumbnail img-fluid" alt="">
+
+                                            <span class="product-new-top">{{  s.quantitedispo }}  KG </span>
+                                        </div>
+                                        <div class="item-info-product">
+                                            <div class="info-product-price">
+                                                <div class="grid_meta">
+                                                    <div class="product_price">
+                                                        <h4>
+                                                            <a >{{  s.description }}</a>
+                                                        </h4>
+                                                        <div class="grid-price mt-2">
+                                                            <span class="money ">{{s.prixuni  }} DT /KG </span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="toys single-item hvr-outline-out">
+                                                    <form name="form" method="POST" action="{{ path('Ajout_ligneCommande',{'id_cat':s.idCat}) }}" >
+                                                        <label> </label>
+                                                        <button type="submit" class="toys-cart ptoys-cart" onclick="if(document.getElementById('qte').value<0){alert('vous ne devez pas mettre un nombre négatif');return false}">
+                                                            <i class="fas fa-cart-plus"></i>
+
+                                                        </button>
+                                                        <div class="grid-price mt-2">
+                                                            <span class="money ">Quantité desirée </span>
+                                                            <input type="text" name="quantite" id="qte" required="required" >
+
+                                                        </div>
+
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        </div>
+        </div>
+        </div>
+
+
+    </section>
+
+
+{% endblock %}
+
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+
+
+
+
+{% endblock %}

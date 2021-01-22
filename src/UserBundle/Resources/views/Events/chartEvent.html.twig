@@ -1,0 +1,55 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="index.html">Les Evénements</a>
+                    <span>/ /</span>
+                </li>
+                <li>les plus populaires</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+<html>
+<head></head>
+<body> <div id="div_chart"></div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
+
+</script>
+<script type="text/javascript"> {{ gc_draw(piechart, 'div_chart') }}
+</script>
+</body>
+</html>
+{% endblock %}
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}

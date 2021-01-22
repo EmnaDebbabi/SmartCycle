@@ -1,0 +1,39 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+
+    <div class="left-ads-display col-lg-9">
+        <div class="row">
+
+
+            {{ form_start(form) }}
+
+
+
+            <table align="center">
+                <tr>
+                    <td>Nom de catégorie</td>
+                    <td>{{ form_widget(form.nomcategorie) }}</td>
+                </tr>
+                <tr>
+                    <td>Type de Catégorie</td>
+                    <td>{{ form_widget(form.type) }}</td>
+                </tr>
+                <tr>
+                    <td>Image de catégorie</td>
+                    <td>{{ form_widget(form.file) }}</td>
+                </tr>
+
+
+
+                <tr>
+                    <td align="center" colspan="2">{{ form_widget(form.Ajouter) }}</td>
+                </tr>
+            </table>
+
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

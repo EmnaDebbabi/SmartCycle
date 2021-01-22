@@ -1,0 +1,125 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="index.html">
+                        Mes événements </a>
+                    <span>/ /</span>
+                </li>
+                <li>Modofier</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+    <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <div class="shop_inner_inf">
+                <div class="privacy about">
+                    <h3>Mes<span>Evénements</span></h3>
+
+                    <div class="checkout-left">
+                        <div class="col-md-8 address_form">
+                            {{ form_start(form) }}
+                            <h4>Modifier mon événement {{ nom }}</h4>
+                            <form method="post" class="creditly-card-form agileinfo_form">
+                                <section class="creditly-wrapper wrapper">
+                                    <div class="information-wrapper">
+                                        <div class="first-row form-group">
+
+                                            <div class="controls">
+                                                <label class="control-label">Nom d'événement </label>
+                                                {{ form_widget(form.nom,{'attr':{'class':'form-control','placeholder':"Saisir le nom de l'événement"}}) }}
+                                            </div>
+                                            <div class="controls">
+                                                <label class="control-label">Type d'événement </label>
+                                                {{ form_widget(form.type,{'attr':{'class':'form-control','placeholder':"Saisir le type de l'événement"}}) }}
+                                            </div>
+                                            <div class="controls">
+                                                <label class="control-label">Date d'événement </label>
+                                                {#{{ form_widget(form.date,{'attr':{'class':'form-control','placeholder':"Saisir la date de l'événement"}}) }}#}
+                                                <input type="date" class="form-control" rows="3"  name="date" id="dat" value="{{ fot}}">
+                                            </div>
+                                            <div class="controls">
+                                                <label class="control-label">Lieu d'événement </label>
+                                                {{ form_widget(form.lieu,{'attr':{'class':'form-control','placeholder':"Saisir le lieu de l'événement"}}) }}
+                                            </div>
+                                            <div class="controls">
+                                                <label class="control-label">Description d'événement </label>
+                                                {{ form_widget(form.description,{'attr':{'class':'form-control','placeholder':"Saisir la description de l'événement"}}) }}
+                                            </div>
+                                            <div class="controls">
+                                                <label class="control-label">Heure d'événement </label>
+                                                {{ form_widget(form.heure,{'attr':{'class':'form-control','placeholder':"Saisir l'heure de l'événement"}}) }}
+                                            </div>
+                                            <div class="controls">
+                                                <label class="control-label">choisir une nouvelle photo de d'événement  </label>
+                                                {{ form_widget(form.file) }}
+                                                {{ form_errors(form.file) }}
+                                            </div>
+
+                                            <button class="btn btn-block sent-butnn" onclick="var GivenDate = document.getElementById('dat').value;
+                                                                                                        var CurrentDate = new Date();
+                                                                                                        GivenDate = new Date(GivenDate);
+                                                                                                        if( GivenDate <= CurrentDate){
+                                                                                                            alert('invalide!donner une date supérieure à la date courrante ');
+                                                                                                            return false;
+                                                                                                            }">Valider</button>
+                                            <a href="{{ path("show_MyEvent")}}">Annuler</a>
+                                        </div>
+
+                                        </div>
+
+
+
+                                </section>
+                            </form>
+                            {{ form_end(form) }}
+
+                            <div class="checkout-right-basket">
+                                <a href="{{ path("add_Event")}}">Ajouter un nouveau événement </a>
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"> </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- //top products -->
+        </div>
+    </section>
+{% endblock %}
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}
+

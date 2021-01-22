@@ -1,0 +1,247 @@
+user_homepage:
+    path:     /index
+    defaults: { _controller: UserBundle:Default:index }
+
+show_Event:
+    path:     /show_Event
+    defaults: { _controller: UserBundle:Events:showEvent }
+add_Event:
+    path:     /add_Event
+    defaults: { _controller: UserBundle:Events:addEvent }
+show_MyEvent:
+    path:     /show_MyEvent
+    defaults: { _controller: UserBundle:Events:showMyEvent }
+remove_MyEvent:
+    path:     /remove_MyEvent
+    defaults: { _controller: UserBundle:Events:RemoveEvent }
+update_MyEvent:
+    path:     /update_MyEvent/{id}
+    defaults: { _controller: UserBundle:Events:updateEvent }
+add_Participant:
+    path:     /add_Participant/{id}
+    defaults: { _controller: UserBundle:Participation:Participer }
+show_MyParticipation:
+    path:     /show_MyParticipation
+    defaults: { _controller: UserBundle:Events:showMyParticipation }
+Annuler_MyParticipation:
+    path:     /Annuler_MyParticipation/{id}
+    defaults: { _controller: UserBundle:Events:AnnulerParticipation }
+Search_Event:
+    path:     /rechercherEvent
+    defaults: { _controller: UserBundle:Events:rechercherEvent }
+Avis_Event:
+    path:     /AvisEvent/{id}
+    defaults: { _controller: UserBundle:Events:AvisEvent }
+ajax_search:
+    path:     /search
+    defaults: { _controller: UserBundle:Events:search }
+Chart_Event:
+    path:     /pieChart
+    defaults: { _controller: UserBundle:Participation:stat }
+Detail_Event:
+    path:     /DetailEvent/{id}
+    defaults: { _controller: UserBundle:Events:detailEvent }
+Proposition_Event:
+    path:     /Messenger
+    defaults: { _controller: UserBundle:Events:Message }
+usersConnected_Event:
+    path:     /usersConnected_Event
+    defaults: { _controller: UserBundle:Events:usersConnectedEvent }
+#    Chat fosMessage
+inbox_Event:
+    path:     /inbox
+    defaults: { _controller: UserBundle:Message:inbox }
+sent_Event:
+    path:     /sent
+    defaults: { _controller: UserBundle:Message:sent }
+deleted_Event:
+    path:     /deleted
+    defaults: { _controller: UserBundle:Message:deleted }
+thread_Event:
+    path:     /newthread/{threadId}
+    defaults: { _controller: UserBundle:Message:thread }
+newthread_Event:
+    path:     /newthread
+    defaults: { _controller: UserBundle:Message:newThread }
+undelete_Event:
+    path:     /undelete/{threadId}
+    defaults: { _controller: UserBundle:Message:undelete }
+delete_Event:
+    path:     /delete/{threadId}
+    defaults: { _controller: UserBundle:Message:delete }
+#
+Cadeaux_Event:
+    path:     /CadeauxEvent
+    defaults: { _controller: UserBundle:Events:PointsCadeaux }
+CodeCadeau_Event:
+    path:     /CodeCadeau
+    defaults: { _controller: UserBundle:Events:CodeCadeau }
+PdfCadeau_Event:
+    path:     /PdfCadeau
+    defaults: { _controller: UserBundle:Events:PdfCadeau }
+
+#association routes:
+association_ajout:
+    path:     /ajoutasso
+    defaults: { _controller: UserBundle:Association:ajout }
+association_list:
+    path:     /listasso
+    defaults: { _controller: UserBundle:Association:list }
+association_listmy:
+    path:     /listmyasso
+    defaults: { _controller: UserBundle:Association:listmy }
+association_update:
+    path:     /updateA/{id}
+    defaults: { _controller: UserBundle:Association:update }
+association_delete:
+    path:     /deleteA/{id}
+    defaults: { _controller: UserBundle:Association:delete }
+association_inassociation:
+    path:     /inassociation
+    defaults: { _controller: UserBundle:Association:inassociation }
+association_access:
+    path:     /associationAccess/{id}
+    defaults: { _controller: UserBundle:Association:associationAccess }
+association_listadheration:
+    path:     /asso
+    defaults: { _controller: UserBundle:Association:listadh }
+association_ajax_search:
+    path:     /a_search
+    defaults: { _controller: UserBundle:Association:search }
+association_about:
+    path:     /about/{id}
+    defaults: { _controller: UserBundle:Association:aboutAssociation }
+delete_notif:
+    path:     /dnotif/{id}
+    defaults: { _controller: UserBundle:Notification:delete }
+association_carte:
+    path:     /carte/{id}
+    defaults: { _controller: UserBundle:Association:carte }
+
+#Stock
+Stock_list:
+    path:     /list
+    defaults: { _controller: UserBundle:Stock:listStock }
+Stock_Recherche:
+    path:     /rechercher
+    defaults: { _controller: UserBundle:Stock:rechercherStock }
+Ajout_ligneCommande:
+    path:     /ajoutaupanier
+    defaults: { _controller: UserBundle:Panier:ajouterlignecommande }
+panier:
+    path:     /panier
+    defaults: { _controller: UserBundle:Panier:AffichePanier }
+deletelignecommande:
+    path:     /deletelignecmd
+    defaults: { _controller: UserBundle:Panier:supprimerligneCommande }
+supprimercommande:
+    path:     /deletecmd
+    defaults: { _controller: UserBundle:Panier:supprimercommande }
+sandbox_pdfexample:
+    path:     /pdfFacture/{idCmd}
+    defaults: { _controller: UserBundle:Panier:pdf }
+validCommande:
+    path:     /valideCommande
+    defaults: { _controller: UserBundle:Panier:valideCommande }
+CommandeClient:
+    path:     /MesCommandes
+    defaults: { _controller: UserBundle:Commande:Commande }
+MesPoints:
+    path:     /MesPoints
+    defaults: { _controller: UserBundle:Commande:Point }
+Paiement:
+    path:     /Paiement/{idCmd}
+    defaults: { _controller: UserBundle:Commande:paiement }
+PasserauPaiement:
+     path:     /PasseraauPaiement
+     defaults: { _controller: UserBundle:Commande:passerauPayement }
+AjaxStock:
+     path:     /rechercheProduit
+     defaults: { _controller: UserBundle:Stock:Search }
+accederaumoncadeaux:
+     path:     /moncadeaux
+     defaults: { _controller: UserBundle:Commande:accederaupoint }
+
+
+
+#topic
+addTopic:
+    path:     /addTopic
+    defaults: { _controller: UserBundle:Forum:add}
+
+listTopic:
+    path:     /listTopic
+    defaults: { _controller: UserBundle:Forum:list}
+showTopic:
+    path:     /showTopic/{id}
+    defaults: { _controller: UserBundle:Forum:showTopic}
+
+
+updateTopic:
+    path:     /updateTopic/{id}
+    defaults: { _controller: UserBundle:Forum:updateTopic}
+
+
+updateCommentaire:
+    path:     /updateCommentaire/{id}
+    defaults: { _controller: UserBundle:Forum:updateCommentaire}
+
+deleteTopic:
+    path:     /deleteTopic/{id}
+    defaults: { _controller: UserBundle:Forum:deleteTopic}
+
+deleteCommenataire:
+    path:     /deleteCommenatire/{id}
+    defaults: { _controller: UserBundle:Forum:deleteCommentaire}
+
+signaler:
+         path:     /signaler/{id}
+         defaults: { _controller: UserBundle:Forum:signaler}
+
+signalerCommentaire:
+         path:     /signalerCommentaire/{id}
+         defaults: { _controller: UserBundle:Forum:signalerCommentaire}
+
+oneStar:
+         path:     /oneStar/{id}
+         defaults: { _controller: UserBundle:Forum:oneStar}
+
+
+twoStar:
+         path:     /twoStar/{id}
+         defaults: { _controller: UserBundle:Forum:twoStar}
+
+
+threeStar:
+         path:     /threeStar/{id}
+         defaults: { _controller: UserBundle:Forum:threeStar}
+
+fourStar:
+         path:     /fourStar/{id}
+         defaults: { _controller: UserBundle:Forum:fourStar}
+
+
+
+Recherche:
+         path:     /Recherche
+         defaults: { _controller: UserBundle:Forum:Recherche}
+Topic_ajax_search:
+    path:     /Topic_search
+    defaults: { _controller: UserBundle:Forum:search }
+
+#fronthoussem
+produit_index:
+    path:    /indprod
+    defaults: { _controller: UserBundle:Produit:index}
+produit_aff:
+    path:    /tousprod
+    defaults: { _controller: UserBundle:Produit:aff}
+produit_new:
+    path:    /newprod
+    defaults: { _controller: UserBundle:Produit:new}
+produit_edit:
+    path:    /editprod{id}
+    defaults: { _controller: UserBundle:Produit:edit}
+produit_delete:
+    path:    /deleteprod{id}
+    defaults: { _controller: UserBundle:Produit:delete}

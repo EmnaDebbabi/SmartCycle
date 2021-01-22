@@ -1,0 +1,52 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+
+
+    <div class="bs-example widget-shadow" data-example-id="contextual-table">
+        <h3> Les demandes d'adhération :</h3>
+        <table class="table">
+            <thead>
+            <tr >
+                <th>etat</th>
+                <th>Association</th>
+                <th>Membre</th>
+                <th>Acceptez demande</th>
+                <th>Refuser demande</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for d in demande  %}
+
+
+                    {% if d.etat == 'refuser' %}
+                        <tr class="danger">
+
+                    {% elseif d.etat == 'valider' %}
+                        <tr class="success">
+                        {% else %}
+                        <tr class="info">
+                    {% endif %}
+
+
+                        <th >{{ d.etat }}</th>
+                        <th >{{ d.ida.nomAssociation }}</th>
+                        <th>{{ d.idm.username }}</th>
+                        <td><a href="{{ path("demande_accept",{'id':d.id}) }}" onclick="return confirm('Etes vous sur d accepter le demande?')"><i class="fa fa-pencil-square-o"></i></a></td>
+                        <td ><a href="{{ path("demande_refus",{'id':d.id}) }}" onclick="return confirm('Etes vous sur de supprimer cet produit?')"><i width="100px" class="fa fa-trash-o"></i></a></td>
+
+                          </tr>
+
+            {% endfor %}
+            <tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+
+{% endblock %}

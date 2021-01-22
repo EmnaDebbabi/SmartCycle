@@ -1,0 +1,116 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="index.html">Mes Evénements</a>
+                    <span>/ /</span>
+                </li>
+                <li>Ajout</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+<!DOCTYPE html>
+
+        <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}" />
+        {#<title>{% trans from 'FOSMessageBundle' %}messenger{% endtrans %}</title>#}
+
+    <section class="sub-below-address py-lg-4 py-md-3 py-sm-3 py-3">
+
+        <section class="container py-lg-5 py-md-5 py-sm-4 py-3">
+            <h3 class="title clr text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">{% trans from 'FOSMessageBundle' %}messenger{% endtrans %}</h3>
+
+
+            {{ render(controller('UserBundle:Events:usersConnectedEvent')) }}
+                            <div class="icons mt-4 text-center">
+
+
+
+                                <ul>
+                                    <li> <a href="{{ url('inbox_Event') }}">{% trans from 'FOSMessageBundle' %}
+                            Message(s)reçu(s){% endtrans %}</a> </li>
+
+                    <li><a href="{{ url('sent_Event') }}">{% trans from 'FOSMessageBundle' %}Message(s) envoyé(s){% endtrans %}</a></li>
+                    <li><a href="{{ url('deleted_Event') }}">{% trans from 'FOSMessageBundle' %}Message(s) supprimé(s) {% endtrans %}</a></li>
+
+                </ul>
+
+
+                {% block fos_message_content %}{% endblock %}
+
+{#{% endif %}#}
+
+
+            </div>
+            <div class="email-sub-agile">
+
+            </div>
+
+    </section>
+
+
+
+{% endblock %}
+{% block js %}
+    <script src="{{ asset('notif/lobibox.js') }}"></script>
+    <script src="{{ asset('datePicker.js') }}"></script>
+    <script>
+        function datecheck() {
+            var GivenDate = document.getElementById('dat').value;
+            var CurrentDate = new Date();
+            GivenDate = new Date(GivenDate);
+            if( GivenDate < CurrentDate){
+                alert('Given date is smaller than the current date.');
+            }return false
+
+        }
+
+        function validateForm(){
+
+            var date1 = $("#date").val();
+            var d1 = moment(date1, "YYYY-MM-DD").add(1, 'days');
+            var d3 = new Date();
+
+            if(d1 < d3)
+            {
+                alert("ghalet")
+                return false;
+            }
+            alert("shih")
+            return true ;
+
+        }
+    </script>
+{% endblock %}
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}

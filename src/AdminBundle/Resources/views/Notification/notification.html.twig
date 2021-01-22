@@ -1,0 +1,29 @@
+{% block notification %}
+    {% set i = 0 %}
+    {% for notif in notifs %}
+        {% set i = i + 1 %}
+    {% endfor %}
+<li class="dropdown head-dpdn">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">{{ i }}</span></a>
+    <ul class="dropdown-menu">
+        <li>
+            <div class="notification_header">
+                <h3>You have {{ i }} new notification</h3>
+            </div>
+        </li>
+    {% for notif in notifs %}
+        <li><a href="#">
+                <div class="user_img"><img src="{{asset('templateBack/images/1.jpg')}}" alt=""></div>
+                <div class="notification_desc">
+                    <p>{{ notif.title }}</p>
+                    <p><span>{{ notif.description }}</span></p>
+                </div>
+                <div class="clearfix"></div>
+            </a></li>
+        {% endfor %}
+
+
+        </li>
+    </ul>
+</li>
+{% endblock notification %}

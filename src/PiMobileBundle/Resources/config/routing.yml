@@ -1,0 +1,202 @@
+pi_mobile_homepage:
+    path:     /
+    defaults: { _controller: PiMobileBundle:Default:index }
+#user
+pi_mobile_users_all:
+    path:     /allusers
+    defaults: { _controller: PiMobileBundle:Membre:all }
+pi_mobile_new_user:
+    path:     /newuser
+    defaults: { _controller: PiMobileBundle:Membre:new }
+pi_mobile_find_user:
+    path:     /finduser/{email}
+    defaults: { _controller: PiMobileBundle:Membre:find }
+ClientProfile_edit:
+    path:     /editMembre/{id}
+    defaults: { _controller: PiMobileBundle:Membre:edit }
+
+#association med :
+pi_mobile_association_list:
+    path:     /listA
+    defaults: { _controller: PiMobileBundle:Association:all }
+pi_mobile_association_listmy:
+    path:     /listMyA
+    defaults: { _controller: PiMobileBundle:Association:my }
+pi_mobile_association_new:
+    path:     /newA
+    defaults: { _controller: PiMobileBundle:Association:new }
+pi_mobile_association_delete:
+    path:     /deleteA
+    defaults: { _controller: PiMobileBundle:Association:remove }
+pi_mobile_association_update:
+    path:     /updateA
+    defaults: { _controller: PiMobileBundle:Association:update }
+pi_mobile_association_search:
+    path:     /searchA
+    defaults: { _controller: PiMobileBundle:Association:search }
+pi_mobile_association_reg:
+    path:     /newR
+    defaults: { _controller: PiMobileBundle:Association:testdate }
+pi_mobile_demande_new:
+    path:     /newD
+    defaults: { _controller: PiMobileBundle:Association:newdemande }
+pi_mobile_adheration_list:
+    path:     /listAd
+    defaults: { _controller: PiMobileBundle:Association:listadh }
+pi_mobile_adheration_btName:
+    path:     /btName
+    defaults: { _controller: PiMobileBundle:Association:buttonName }
+pi_mobile_association_rating:
+    path:     /rating
+    defaults: { _controller: PiMobileBundle:Association:rate }
+
+
+
+#Evenement
+pi_mobile_Event_new:
+    path:     /newEvent/{id}
+    defaults: { _controller: PiMobileBundle:Events:newEvent }
+pi_mobile_all_Events:
+    path:     /allEvents
+    defaults: { _controller: PiMobileBundle:Events:allEvents }
+pi_mobile_all_Events2:
+    path:     /allEvents2/{id}
+    defaults: { _controller: PiMobileBundle:Events:showallEvents2 }
+pi_mobile_My_Events:
+    path:     /MyEvents/{id}
+    defaults: { _controller: PiMobileBundle:Events:showMyEvent }
+pi_mobile_find_Event:
+    path:     /findEvent/{id}
+    defaults: { _controller: PiMobileBundle:Events:findEvent }
+pi_mobile_Remove_Event:
+    path:     /RemoveEvent/{id}
+    defaults: { _controller: PiMobileBundle:Events:removeEvent }
+pi_mobile_Avis_Event:
+    path:     /AvisEvent/{idu}/{id}
+    defaults: { _controller: PiMobileBundle:Events:AvisEvent }
+pi_mobile_find_Participant:
+    path:     /findParticipant/{idevent}/{idu}
+    defaults: { _controller: PiMobileBundle:Events:findParticipant }
+pi_mobile_Cadeau_Participant:
+    path:     /findnb/{idu}
+    defaults: { _controller: PiMobileBundle:Events:PointsCadeaux }
+pi_mobile_CodeCadeau_Participant:
+    path:     /CodeCadeaux/{idu}/{criteria}
+    defaults: { _controller: PiMobileBundle:Events:CodeCadeaux }
+pi_mobile_Collecte_Stat:
+    path:     /CollecteStat
+    defaults: { _controller: PiMobileBundle:Events:StatCollecte }
+pi_mobile_Recyclage_Stat:
+    path:     /StatRecyclage
+    defaults: { _controller: PiMobileBundle:Events:StatRecyclage }
+pi_mobile_Sensibilisation_Stat:
+    path:     /StatSensibilisation
+    defaults: { _controller: PiMobileBundle:Events:StatSensibilisation }
+pi_mobile_Nature_Stat:
+    path:     /StatNature
+    defaults: { _controller: PiMobileBundle:Events:StatNature }
+pi_mobile_CodeCadeau_Verification:
+    path:     /VerifCode/{idu}/{criteria}
+    defaults: { _controller: PiMobileBundle:Events:VerifierCodeCadeaux }
+
+#Stock khawla :
+pi_mobile_stock_list:
+    path:     /listStock
+    defaults: { _controller: PiMobileBundle:Stock:all }
+ajouterlc:
+    path:     /ajouterlc/{id}/{idstock}/{qt}
+    defaults: { _controller: PiMobileBundle:Panier:ajouterlc }
+AllLc:
+    path:     /AllLc/{id}
+    defaults: { _controller: PiMobileBundle:Panier:AllLc }
+SuppLc:
+    path:     /suppLc/{idu}/{id}
+    defaults: { _controller: PiMobileBundle:Panier:supprimerLCom }
+ModifLc:
+    path:     /modifLc/{id}/{qt}
+    defaults: { _controller: PiMobileBundle:Panier:modifqt }
+SuppCom:
+    path:     /SuppCom/{id}
+    defaults: { _controller: PiMobileBundle:Panier:supprimerCom }
+valider:
+    path:     /valider/{id}
+    defaults: { _controller: PiMobileBundle:Panier:valider }
+MesComm:
+    path:     /Mescom/{id}
+    defaults: { _controller: PiMobileBundle:Panier:mesCommandes }
+Point:
+    path:     /point/{id}
+    defaults: { _controller: PiMobileBundle:Panier:point }
+Acceder:
+    path:     /accederaupoint/{id}
+    defaults: { _controller: PiMobileBundle:Panier:accederaupoint }
+Payer:
+    path:     /Payer/{idu}/{id}
+    defaults: { _controller: PiMobileBundle:Panier:paiement }
+
+
+#Emna
+
+pi_mobile_Find_Event:
+    path:     /FindEvent/{titre}
+    defaults: { _controller: PiMobileBundle:Events:chercherEvent }
+pi_mobile_Update_Event:
+    path:     /updateEvent/{id}/{idu}
+    defaults: { _controller: PiMobileBundle:Events:updateEvent }
+pi_mobile_Participate_Event:
+    path:     /add_Participant/{idevent}/{idm}
+    defaults: { _controller: PiMobileBundle:Events:Participer }
+pi_mobile_MyParticipation:
+    path:     /MyParticipation/{id}
+    defaults: { _controller: PiMobileBundle:Events:showMyParticipation }
+
+
+
+pi_mobile_Produit:
+    path:     /Newproduct
+    defaults: { _controller: PiMobileBundle:Produit:new }
+#Wiem Forum
+api_showwww_topic:
+    path:     show_topic
+    defaults: { _controller: PiMobileBundle:SWForum:liste}
+
+api_ajouut_topic:
+    path:     aj_topic
+    defaults: { _controller:  PiMobileBundle:SWForum:add}
+
+api_suuupp_topic:
+    path:     suupp_topic/{id}
+    defaults: { _controller:  PiMobileBundle:SWForum:deleteTopic}
+api_mod_topic:
+    path:     mood_topic/{id}
+    defaults: { _controller: PiMobileBundle:SWForum:updateTopic}
+api_aff_cat:
+    path:     aff_cat
+    defaults: { _controller:  PiMobileBundle:SWForum:listCat}
+api_aff_catname:
+    path:     aff_catname/{wi}
+    defaults: { _controller: PiMobileBundle:SWForum:Catname}
+
+
+#    Ahmed
+transport_homepage:
+    path:     /login
+    defaults: { _controller: TransportBundle:Mobile:index }
+transport_produit:
+    path:     /produit
+    defaults: { _controller: TransportBundle:Mobile:produitAll }
+transport_produit_detail:
+    path:     /produit/{id}
+    defaults: { _controller: TransportBundle:Mobile:produit }
+transport_mission:
+    path:     /missions/{id}
+    defaults: { _controller: TransportBundle:Mobile:missionAll }
+transport_mission_detail:
+    path:     /mission/{id}
+    defaults: { _controller: TransportBundle:Mobile:mission }
+transport_mission_ajoute:
+    path:     /ajoute
+    defaults: { _controller: TransportBundle:Mobile:ajouteMis }
+transport_mission_delete:
+    path:     /delete/{id}
+    defaults: { _controller: TransportBundle:Mobile:deleteMis }

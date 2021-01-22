@@ -1,0 +1,61 @@
+{% extends "@Admin/Default/index.html.twig" %}
+{% block body %}
+
+<center>
+    <ul>
+
+            <a href="{{ path('transporteur_new') }}"><button class="btn btn-dark"><i class="fa fa-plus"></i> Create a new transporteur <i class="fa fa-plus"></i></button></a>
+
+
+    </ul>
+    <div class="table-responsive bs-example widget-shadow">
+        <h1>Transporteur list</h1>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col" hidden>Id Transporteur</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Adresse</th>
+            <th>cin</th>
+            <th>Telephone</th>
+            <th>Permit</th>
+            <th colspan="2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for c in transports %}
+            <tr>
+                <td hidden>{{ c.id }}</a></td>
+                <td>{{ c.nom }}</td>
+                <td>{{ c.prenom }}</td>
+                <td>{{ c.cin }}</td>
+                <td>{{ c.adresse }}</td>
+                <td>{{ c.telephone }}</td>
+                <td>{{ c.permit }}</td>
+                <td>
+                    <a href="{{ path('transporteur_edit', { 'id': c.id }) }}"><button class="btn btn-primary"> <i class="fa fa-edit" ></i> edit  </button></a>
+                </td>
+                <td>
+                    <a href="{{ path('transporteur_delete', { 'id': c.id }) }}"> <button class="btn btn-danger"> <i class="fa fa-trash" ></i> Delete</button></a>
+                </td>
+            </tr>
+
+
+
+
+
+
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+
+        <a href="{{ path('transporteur_new') }}"><button class="btn btn-dark"><i class="fa fa-plus"></i> Create a new transporteur <i class="fa fa-plus"></i></button></a>
+
+
+</center>
+
+{% endblock %}

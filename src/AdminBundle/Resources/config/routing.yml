@@ -1,0 +1,147 @@
+admin_homepage:
+    path:     /index
+    defaults: { _controller: AdminBundle:Default:index }
+#stock routes (khawla)
+stock_ajout:
+    path:     /stockajout
+    defaults: { _controller: AdminBundle:Stock:ajout }
+stock_list:
+    path:     /stocklist
+    defaults: { _controller: AdminBundle:Stock:listStock }
+stock_delete:
+    path:     /stockdelete
+    defaults: { _controller: AdminBundle:Stock:DeleteStock }
+stock_update:
+    path:     /stockupdate
+    defaults: { _controller: AdminBundle:Stock:updateStock }
+Commandes:
+    path:     /CommandesAdmin
+    defaults: { _controller: AdminBundle:Commande:AfficherCommandes }
+Endetail:
+    path:     /VoirEnDetail
+    defaults: { _controller: AdminBundle:Commande:Endetail }
+Stockpayé:
+    path:     /Stat
+    defaults: { _controller: AdminBundle:Stock:stat }
+
+
+#Events
+Show_Event:
+    path:     /showEvent
+    defaults: { _controller: AdminBundle:Events:showEvent }
+Remove_Event:
+    path:     /RemoveEvent
+    defaults: { _controller: AdminBundle:Events:RemoveEvent }
+Update_Event:
+    path:     /UpdateEvent/{id}
+    defaults: { _controller: AdminBundle:Events:UpdateEvent }
+show_Avis:
+    path:     /ShowAvis
+    defaults: { _controller: AdminBundle:Events:showAvis }
+chart_Event:
+    path:     /ChartEvent
+    defaults: { _controller: AdminBundle:Events:stat }
+TrierNom_Event:
+    path:     /TrierNom_Event
+    defaults: { _controller: AdminBundle:Events:TrierParNom }
+TrierType_Event:
+    path:     /TrierType_Event
+    defaults: { _controller: AdminBundle:Events:TrierParType }
+TrierLieu_Event:
+    path:     /TrierLieu_Event
+    defaults: { _controller: AdminBundle:Events:TrierParLieu }
+#association routes (med)
+demande_list:
+    path:     /demandelist
+    defaults: { _controller: AdminBundle:Association:list }
+demande_accept:
+    path:     /demande_accept/{id}
+    defaults: { _controller: AdminBundle:Association:accepter }
+demande_refus:
+    path:     /demande_refus/{id}
+    defaults: { _controller: AdminBundle:Association:refuser }
+asso_stats:
+    path:     /assoStats
+    defaults: { _controller: AdminBundle:Association:stats }
+asso_Avis:
+    path:     /listAvis
+    defaults: { _controller: AdminBundle:Association:listAvis }
+asso_mail:
+    path:     /composemail/{id}
+    defaults: { _controller: AdminBundle:Association:mail }
+
+#association routes (med)
+ajouterCategorie:
+    path:     /ajouterCategorie
+    defaults: { _controller: AdminBundle:categorie:addCat }
+
+modifierCategorie:
+        path:     /modifierCategorie
+        defaults: { _controller: AdminBundle:categorie:updateCat }
+
+listerCategorie:
+         path:     /listerCategorie
+         defaults: { _controller: AdminBundle:categorie:listCat}
+
+supprimerCategorie:
+         path:     /supprimerCategorie
+         defaults: { _controller: AdminBundle:categorie:DeleteCat}
+listerTopic:
+         path:     /listerTopic
+         defaults: { _controller: AdminBundle:topic:listTopic}
+
+
+approuver:
+         path:     /approuver
+         defaults: { _controller: AdminBundle:topic:approuver}
+
+refuser:
+         path:     /refuser
+         defaults: { _controller: AdminBundle:topic:refuser}
+
+
+#transporteur
+mession_index:
+    path:     /indexaa
+    defaults: { _controller: AdminBundle:Messions:index }
+transporteur_edit:
+    path:     /edit/{id}
+    defaults: { _controller: AdminBundle:Transporteur:edit }
+transporteur_index:
+    path:     /indexa
+    defaults: { _controller: AdminBundle:Transporteur:index}
+transporteur_show:
+    path:     /show/{id}
+    defaults: { _controller: AdminBundle:Transporteur:show}
+transporteur_new:
+    path:     /new
+    defaults: { _controller: AdminBundle:Transporteur:new}
+transporteur_edit:
+    path:     /edit/{id}
+    defaults: { _controller: AdminBundle:Transporteur:edit}
+transporteur_delete:
+    path:     /delete/{id}
+    defaults: { _controller:AdminBundle:Transporteur:delete}
+Messions_affectee:
+    path:     /affect/{id}
+    defaults: { _controller: AdminBundle:Messions:affectee }
+
+#backhoussem
+categorie_list:
+    path:    /lists
+    defaults: { _controller: AdminBundle:Categoriep:lists}
+categorie_ajout:
+    path:    /ajout
+    defaults: { _controller: AdminBundle:Categoriep:ajout}
+categorie_edit:
+    path:   /editc/{id}
+    defaults: { _controller:  AdminBundle:Categoriep:edit}
+categorie_delete:
+    path:   /deletec/{id}
+    defaults: { _controller:  AdminBundle:Categoriep:delete}
+produit_show:
+    path:   /show
+    defaults: { _controller:  AdminBundle:Categoriep:produitShow}
+delete_Back:
+    path:    /deletee{id}
+    defaults: { _controller: AdminBundle:Categoriep:deleteBack}

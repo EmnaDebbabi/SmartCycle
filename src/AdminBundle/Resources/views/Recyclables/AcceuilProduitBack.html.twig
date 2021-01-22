@@ -1,0 +1,49 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+
+
+    <table class="table table-hover  background-color: white">
+
+        <thead>
+        <tr>
+            <th scope="col" hidden>Id Produit</th>
+            <th scope="col">Nom Produit</th>
+            <th scope="col">Type Produit</th>
+            <th scope="col">Quantité Produit</th>
+            <th scope="col">image</th>
+            <th scope="col">Description</th>
+            <th scope="col">Statu</th>
+            <th scope="col">Date d'ajout</th>
+            <th colspan="2"  scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for p in produits %}
+            <tr>
+                <td hidden>{{ p.id }}</a></td>
+                <td>{{ p.nomproduit }}</td>
+                <td>{{ p.typeproduit.type }}</td>
+                <td>{{ p.quantiteproduit }}</td>
+                <td><img src=" {{ asset('imageProduits/') }}{{ p.nomImage }}" height="70px" alt=""></td></td>
+                <td>{{ p.description }}</td>
+                <td>{{ p.status }}</td>
+                <td>{{ p.dat }}</td>
+
+                <td>
+                    <a href="{{ path('delete_Back', { 'id': p.id }) }}"> <button class="btn btn-danger"> <i class="fa fa-trash" ></i> Delete</button></a>
+                </td>
+            </tr>
+
+
+
+
+
+
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ knp_pagination_render(produits,'@User/Paginator/pagination.html.twig') }}
+
+{% endblock %}

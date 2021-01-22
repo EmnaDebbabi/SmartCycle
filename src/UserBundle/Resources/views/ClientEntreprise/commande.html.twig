@@ -1,0 +1,162 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="{{ path('user_homepage') }}">Smart Cycle Accueil </a>
+                    <span>/ /</span>
+                </li>
+                <li>Mes Commandes </li>
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block body %}
+    {% if cmd|length != 0 %}
+    <div style="background-color: red">
+        <p style="color: white">{{ msg2 }}</p>
+
+    </div>
+    <div style="background-color: red">
+        <p style="color: white">{{ msg3 }}</p>
+
+    </div>
+        {% endif %}
+
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <div class="shop_inner_inf">
+            <div class="privacy about">
+                <h3>Mes Commandes </h3>
+
+                    <table class="timetable_sub">
+                        <thead>
+                        <tr>
+                            <th>Numéro Commande</th>
+                            <th>Total (DT)</th>
+                            <th>Date </th>
+                            <th>Facture </th>
+                            <th>Paiement</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% if cmd|length == 0 %}
+                            <tr>
+                                <td colspan="7"><center>Aucune Commande </center></td>
+                            </tr>
+                        {% endif %}
+
+                        {% set f='1' %}
+                        {% for p in cmd %}
+
+                        {% if p.payement == var %}
+                        <tr class="alert-danger">
+
+                            <td class="invert"> {{ f }}</td>
+                            <td class="invert">
+                                {{  p.total  }}
+                            </td>
+                            <td class="invert"> {{p.date|date('d-m-Y') }}</td>
+                            <td class="invert">
+                                <a href="{{ path('sandbox_pdfexample',{'idCmd':p.idCmd })}}"> Imprimer Votre Facture  </a>
+                            </td>
+                            <td class="invert">
+                                Payé
+                            </td>
+
+                        </tr>
+                        {% else %}
+                            <tr class="rem1">
+
+                                <td class="invert"> {{ f }}</td>
+                                <td class="invert">
+                                    {{  p.total  }}
+                                </td>
+                                <td class="invert"> {{p.date|date('d-m-Y') }}</td>
+                                <td class="invert">
+                                <a href="{{ path('sandbox_pdfexample',{'idCmd':p.idCmd })}}"> Imprimer Votre Facture  </a>
+                                </td>
+                                <td class="invert">
+                                <a href="{{ path('PasserauPaiement',{'idCmd':p.idCmd })}}"> Payer </a>
+                                </td>
+
+                            </tr>
+                            {% endif %}
+                            {% set f=f+1 %}
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+            </div>
+            <div class="col-md address_form">
+                <div class=" checkout-left-basket">
+                    <br>
+                    <h4><a href="{{ path('MesPoints') }}">Consulter Mes Points </a></h4>
+                    <br>
+                </div>
+
+            </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+            <div class="clearfix"> </div>
+                <div class="clearfix"></div>
+
+
+
+
+
+
+        </div>
+    </div>
+    <!-- //top products -->
+    </div>
+{% endblock %}
+
+
+
+
+
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+
+
+
+
+{% endblock %}

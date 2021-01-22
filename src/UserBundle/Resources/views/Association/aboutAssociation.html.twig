@@ -1,0 +1,229 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="{{ path('user_homepage') }}">Index</a>
+                    <span>/</span>
+                </li>
+                <li>Bienvenu a l'association {{ asso.nomAssociation }}</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+    <style>
+        form .stars {
+            background: url("/../SymfonyPi/web/images/stars.png") repeat-x 0 0;
+            width: 150px;
+            margin: 0 auto;
+        }
+
+        form .stars input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+        form .stars input[type="radio"].star-5:checked ~ span {
+            width: 100%;
+        }
+        form .stars input[type="radio"].star-4:checked ~ span {
+            width: 80%;
+        }
+        form .stars input[type="radio"].star-3:checked ~ span {
+            width: 60%;
+        }
+        form .stars input[type="radio"].star-2:checked ~ span {
+            width: 40%;
+        }
+        form .stars input[type="radio"].star-1:checked ~ span {
+            width: 20%;
+        }
+        form .stars label {
+            display: block;
+            width: 30px;
+            height: 30px;
+            margin: 0!important;
+            padding: 0!important;
+            text-indent: -999em;
+            float: left;
+            position: relative;
+            z-index: 10;
+            background: transparent!important;
+            cursor: pointer;
+        }
+        form .stars label:hover ~ span {
+            background-position: 0 -30px;
+        }
+        form .stars label.star-5:hover ~ span {
+            width: 100% !important;
+        }
+        form .stars label.star-4:hover ~ span {
+            width: 80% !important;
+        }
+        form .stars label.star-3:hover ~ span {
+            width: 60% !important;
+        }
+        form .stars label.star-2:hover ~ span {
+            width: 40% !important;
+        }
+        form .stars label.star-1:hover ~ span {
+            width: 20% !important;
+        }
+        form .stars span {
+            display: block;
+            width: 0;
+            position: relative;
+            top: 0;
+            left: 0;
+            height: 30px;
+            background: url("/../SymfonyPi/web/images/stars.png") repeat-x 0 -60px;
+            -webkit-transition: -webkit-width 0.5s;
+            -moz-transition: -moz-width 0.5s;
+            -ms-transition: -ms-width 0.5s;
+            -o-transition: -o-width 0.5s;
+            transition: width 0.5s;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $('input:checkbox').change(function () {
+            if (this.checked) {
+                $('div.menuitem').addClass("selected");
+            }
+        });
+    </script>
+
+    <section class="about py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+
+            <div class="about-innergrid-agile text-center">
+                <h4>Bienvenue dans {{ asso.nomAssociation }} </h4>
+                <img src=" {{ asset('images/') }}{{ asso.nomImage }}" class="img-thumbnail img-fluid" alt="">
+                <ul class="stars">
+                <li>
+
+
+
+                </li>
+                </ul>
+                    <p class="mb-3">Bienvenue dans la page de l'association {{ asso.nomAssociation }} créer par le membre {{ asso.chefId.nom }} en {{ asso.datecreation|date("m/d/y") }}  localiser dans {{ asso.adresse }}  .</p>
+
+                </div>
+            <div align="center">
+                <a href="{{ path('association_carte',{'id':asso.idAssociation}) }}"><i class="fas fa-star"></i>obtenir votre carte d'adhération<i class="fas fa-star"></i></a>
+            </div>
+            </div>
+        <div align="center">
+            <ul>
+            <li >Voter pour {{ asso.nomAssociation }} :</li>
+            </ul>
+        </div>
+        {{ form_start(form) }}
+                <form id="ratingsForm" name="rating">
+
+                    <div class="stars">
+                        <input type="radio" name="star" class="star-1" id="star-1" value="1" />
+                        <label class="star-1" for="star-1">1</label>
+                        <input type="radio" name="star" class="star-2" id="star-2" value="2"/>
+                        <label class="star-2" for="star-2">2</label>
+                        <input type="radio" name="star" class="star-3" id="star-3" value="3"/>
+                        <label class="star-3" for="star-3">3</label>
+                        <input type="radio" name="star" class="star-4" id="star-4" value="4"/>
+                        <label class="star-4" for="star-4">4</label>
+                        <input type="radio" name="star" class="star-5" id="star-5" value="5"/>
+                        <label class="star-5" for="star-5">5</label>
+                        <span></span>
+                    </div>
+
+                    <div align="center">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-two">voter</button>
+                    </div>
+
+
+        <div ng-app="app" ng-controller="myCtrl">
+
+        </div>
+
+    </section>
+
+        <section class="subscribe">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 map-info-right px-0">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d102153.55050277406!2d10.153660810939053!3d36.85927442402094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sesprit!5e0!3m2!1sen!2stn!4v1555117394450!5m2!1sen!2stn" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                    <div class="col-lg-6 col-md-6 address-w3l-right text-center">
+                        <div class="address-gried ">
+                            <span class="far fa-map"></span>
+                            <p>{{ asso.adresse }}<br>Tunisie
+                            </p><p>
+                            </p></div>
+                        <div class="address-gried mt-3">
+                            <span class="fas fa-phone-volume"></span>
+                            <p> +(000)123 4565<br>+(010)123 4565</p>
+                        </div>
+                        <div class=" address-gried mt-3">
+                            <span class="far fa-envelope"></span>
+                            <p><a href="mailto:info@example.com">{{ asso.nomAssociation }}@gmail.com</a>
+                                <br><a href="mailto:info@example.com">smartcycle@gmail.com</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <div class="modal fade" id="exampleModal-two" tabindex="-1" role="dialog" aria-labelledby="exampleModal-twoLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModal-twoLabel">Parlez-nous de votre expérience dans {{ asso.nomAssociation }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {#<textarea placeholder="pourquoi cette note" class="form-control" rows="3" name="description"></textarea>#}
+                    {{ form_widget(form.description,{'attr':{'placeholder':"votre texte ..." }}) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                    <button type="submit" class="btn btn-primary">enregitrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}

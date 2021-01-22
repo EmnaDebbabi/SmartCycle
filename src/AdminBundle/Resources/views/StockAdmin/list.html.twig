@@ -1,0 +1,55 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+
+
+    <div class="bs-example widget-shadow" data-example-id="contextual-table">
+        <h3> Liste de Stock :</h3>
+        <table class="table">
+            <thead>
+            <tr >
+                <th>Description</th>
+                <th>Quantité Disponible</th>
+                <th>Prix Unitaire</th>
+                <th>Image</th>
+                <th>Supprimer</th>
+                <th>Modifier</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set i =0 %}
+            {% for s in stock  %}
+            {% if i % 2 == 1 %}
+            {% set i=i+1 %}
+                <tr class="info">
+
+                    <th >{{ s.description }}</th>
+                    <th >{{ s.quantitedispo }}</th>
+                    <th>{{ s.prixuni }}</th>
+                    <th><img src="{{ asset('ImagesStock/') }}{{ s.nomimage }}" style="width: 50px;height: 50px"></th>
+                    <td ><a href="{{ path('stock_delete',{'id_cat':s.idCat}) }}" onclick="return confirm('Etes vous sur de supprimer cet produit?')"><i width="100px" class="fa fa-trash-o"></i></a></td>
+                    <td><a href="{{ path('stock_update',{'id_cat':s.idCat}) }}" onclick="return confirm('Etes vous sur de modifier cet produit?')"><i class="fa fa-pencil-square-o"></i></a></td>
+                </tr>
+            {% else %}
+                {% set i=i+1 %}
+                <tr class="success">
+
+                    <th >{{ s.description }}</th>
+                    <th >{{ s.quantitedispo }}</th>
+                    <th>{{ s.prixuni }}</th>
+                    <th><img src="{{ asset('ImagesStock/') }}{{ s.nomimage }}" style="width: 50px;height: 50px"></th>
+                    <td ><a href="{{ path('stock_delete',{'id_cat':s.idCat}) }}" onclick="return confirm('Etes vous sur de supprimer cet produit?')"><i width="100px" class="fa fa-trash-o"></i></a></td>
+                    <td><a href="{{ path('stock_update',{'id_cat':s.idCat}) }}" onclick="return confirm('Etes vous sur de modifier cet produit?')"><i class="fa fa-pencil-square-o"></i></a></td>
+                </tr>
+            {% endif %}
+            {% endfor %}
+            <tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+{% endblock %}

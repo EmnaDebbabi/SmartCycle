@@ -1,0 +1,21 @@
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <div align="center">
+    <h2>    {{ Message }}</h2>
+        <br><br><br>
+        {{ barcode({code: '{{ nomuser.iduser}}', type: 'qrcode', format: 'html'}) }}
+        <br><br><br>
+       <h2>Mériter par le gagnant {{ gagnant.nom }}*****{{ gagnant.prenom }}**délivrer à**{{ "now"|date("H:i:s  d/m/Y") }}</h2>
+            <ul class="dropdown-menu6">
+                <li>
+
+                    <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header" style="left: 0.555556%; width: 66.1111%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.555556%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 66.6667%;"></a></div>
+                    <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;">
+                </li>
+            </ul>
+
+        </div>
+</body>
+

@@ -1,0 +1,71 @@
+
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="modal-header">
+
+    <h5 class="modal-title" id="exampleModalLabel">Register </h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+</div>
+    <a href="{{ path('fos_user_security_login')  }}"> j'ai déjà un compte</a>
+
+
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+            <div class="styled-input">
+
+                {{ form_widget(form.nom,{'attr':{'class':'form-control','placeholder':"Saisir votre nom" }}) }}
+                {{ form_errors(form.nom) }}
+            </div>
+            <div class="styled-input">
+
+                {{ form_widget(form.prenom,{'attr':{'class':'form-control','placeholder':"Saisir votre prenom" }}) }}
+                {{ form_errors(form.prenom) }}
+            </div>
+            <div class="styled-input">
+                <label >sexe</label>
+                {{ form_widget(form.sexe,{'attr':{'class':'form-control','placeholder':"Saisir votre sexe" }}) }}
+                {{ form_errors(form.sexe) }}
+            </div>
+            <div class="styled-input">
+                <label >date de naissance</label>
+                {{ form_widget(form.datedenaissance,{'attr':{'class':'form-control','placeholder':"Saisir votre date de naissance" }}) }}
+                {{ form_errors(form.datedenaissance) }}
+            </div>
+            <div class="styled-input">
+                <label >telephone</label>
+                {{ form_widget(form.telephone,{'attr':{'class':'form-control','placeholder':"Saisir votre telephone" }}) }}
+                {{ form_errors(form.telephone) }}
+            </div>
+            <div class="styled-input">
+
+                {{ form_widget(form.adresse,{'attr':{'class':'form-control','placeholder':"Saisir votre adresse" }}) }}
+                {{ form_errors(form.adresse) }}
+            </div><div class="styled-input">
+
+                {{ form_widget(form.email,{'attr':{'class':'form-control','placeholder':"Saisir votre email" }}) }}
+                {{ form_errors(form.email) }}
+            </div><div class="styled-input">
+
+                {{ form_widget(form.username,{'attr':{'class':'form-control','placeholder':"Saisir votre surnom" }}) }}
+                {{ form_errors(form.username) }}
+            </div><div class="styled-input">
+
+                {{ form_widget(form.plainPassword.first,{'attr':{'class':'form-control','placeholder':"Saisir votre mot de passe" }}) }}
+                {{ form_errors(form.plainPassword.first) }}
+            </div>
+            <div class="styled-input">
+
+                {{ form_widget(form.plainPassword.second,{'attr':{'class':'form-control','placeholder':"Saisir encore votre mot de passe" }}) }}
+                {{ form_errors(form.plainPassword.second) }}
+            </div>
+
+<button type="submit" class="btn subscrib-btnn" name="_submit" id="_submit">S'inscrire</button>
+
+
+
+{{ form_end(form) }}

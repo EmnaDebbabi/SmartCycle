@@ -1,0 +1,230 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="index.html">Sujet</a>
+                    <span>/ /</span>
+                </li>
+                <li>afficher</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+    <div style="background-color: #30ffaa">
+        <p style="color: white"></p>
+    </div>
+    <div style="background-color: red">
+        <p style="color: white"></p>
+
+    </div>
+
+    </div>
+
+    <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <div class="shop_inner_inf">
+                <div class="privacy about">
+                    <div class="checkout-right-basket">
+                    </div>
+                    <h3>Sujet choisit </h3>
+
+                    <div class="checkout-right">
+                        <table class="timetable_sub">
+                            <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Description</th>
+                                <th>Auteur</th>
+                                <th>Image associée </th>
+                                {% if event.topicBy==app.user %}  <th>Remove</th>
+                                <th>Update</th>{% endif %}
+                                <th>Signaler</th>
+                                <th>Rate</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+
+
+                                <tr class="rem1">
+                                    <td class="invert">{{ event.topicTitle }}</td>
+
+                                    <td class="invert">{{ event.topicSubject|raw }}</td>
+                                    <td class="invert">{{ event.topicBy }}</td>
+                                    <td class="invert-image"><a href="single.html"><img src="{{ asset('imagesStock/') }}{{ event.photo }} " style="width: 260px;height: 240px" alt=" " class="img-responsive"></a></td>
+                                    {% if event.topicBy==app.user %}  <td class="invert">
+                                        <div class="rem">
+                                            <a href="{{ path("deleteTopic",{'id':event.topicId})}}" >
+                                                <div class="close1"> </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="invert">
+
+                                        <a href="{{ path("updateTopic",{'id':event.topicId})}}" >
+                                            <div class="quantity">
+                                                <div class="quantity-select">
+                                                    <div class="entry value-plus active">&nbsp;</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        {% endif %}
+                                    </td>
+
+                                    <td class="invert">
+                                        <div class="rem">
+                                            <a href="{{ path("signaler",{'id':event.topicId})}}" >
+                                                <div class="close1"> </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="invert">
+                                        <ul class="stars">
+                                            <li>
+                                                <a href="{{ path('oneStar',{'id':event.topicId}) }}">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('twoStar',{'id':event.topicId}) }}">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('threeStar',{'id':event.topicId}) }}">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('fourStar',{'id':event.topicId}) }}">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+
+
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="description">
+                            <h5>Vous pouvez commentez nos sujets</h5>
+                            <form action="#" method="post">
+                                {{ form_start(form) }}
+                                {{ form_widget(form.contenu) }}
+
+                                <input type="submit" value="Commenter">
+                                {{ form_end(form) }}
+                            </form>
+                        </div>
+                        <div class="checkout-right">
+                            <table class="timetable_sub">
+                                <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Description</th>
+                                    {% if event.topicBy==app.user %}  <th>Remove</th>
+                                        <th>Update</th>{% endif %}
+                                    <th>Like</th>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+
+
+
+                                <tr class="rem1">
+                                    <td class="invert">{{ event.topicTitle }}</td>
+
+                                    <td class="invert">{{ reply.Contenu|raw }}</td>
+
+
+                                    {% if reply.user==app.user %}  <td class="invert">
+                                        <div class="rem">
+                                                <div class="close1"> </div>
+
+                                        </div>
+                                    </td>
+                                    <td class="invert">
+
+                                            <div class="quantity">
+                                                <div class="quantity-select">
+                                                    <div class="entry value-plus active">&nbsp;</div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </td>
+
+
+
+                                    <td class="invert">
+
+                                    </td>
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+
+                            <div class="description">
+                                <form action="#" method="post">
+
+                                    <input type="submit" value="Valider le commentaire et afficher tous les commentaires">
+                                    <a href=""></a>
+                                </form>
+                            </div>
+
+                    </div>
+                    <div class="checkout-left">
+
+
+                        <div class="clearfix"> </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- //top products -->
+        </div>
+    </section>
+
+{% endblock %}
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}

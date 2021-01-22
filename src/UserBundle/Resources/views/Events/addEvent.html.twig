@@ -1,0 +1,148 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="index.html">Mes Evénements</a>
+                    <span>/ /</span>
+                </li>
+                <li>Ajout</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('notif/lobibox.min.css') }}"/>
+
+    <link rel="stylesheet" href="{{ asset('datePicker.css') }}" type="text/css">
+    {#
+    , {'attr': {'onsubmit':'return datecheck()' }}
+    #}
+    {{ form_start(form) }}
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Ajouter mon événement</h3>
+        <div class="contact-list-grid">
+            <form action="#" method="post">
+                <div class=" agile-wls-contact-mid">
+
+                    <div class="form-group contact-forms">
+                        <label class="control-label">Nom d'événement </label>
+                        {{ form_widget(form.nom,{'attr':{'class':'form-control','placeholder':"Saisir le nom de l'événement"}}) }}
+                        {{ form_errors(form.nom) }}
+                    </div>
+
+                    <div class="form-group contact-forms">
+                        <label class="control-label">Type de l'événement </label>
+                        {{ form_widget(form.type,{'attr':{'class':'form-control','placeholder':"Saisir le type de l'événement"}}) }}
+                        {{ form_errors(form.type) }}
+                    </div>
+
+
+                    <div class="form-group contact-forms">
+
+
+                        <label class="control-label">Date de l'événement </label>
+
+                        <input type="date" class="form-control" rows="3"  name="date" id="dat">
+
+
+
+                    </div>
+                    <div class="form-group contact-forms">
+                        <label class="control-label">Lieu de l'événement</label>
+                        {{ form_widget(form.lieu,{'attr':{'class':'form-control','placeholder':"Saisir le lieu de l'événement"}}) }}
+                        {{ form_errors(form.lieu) }}
+                    </div>
+                    <div class="form-group contact-forms">
+                        <label class="control-label">Description de l'événement </label>
+                        {{ form_widget(form.description,{'attr':{'class':'form-control','placeholder':"Saisir la description de l'événement"}}) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+                    <div class="form-group contact-forms">
+                        <label class="control-label">L'heure de l'événement </label>
+                        {{ form_widget(form.heure,{'attr':{'class':'form-control','placeholder':"Saisir l'heure de l'événement"}}) }}
+                        {{ form_errors(form.heure) }}
+                    </div>
+                    <div class="form-group contact-forms">
+                        <label class="control-label">Photo d'événement </label>
+                        {{ form_widget(form.file) }}
+                        {{ form_errors(form.file) }}
+                    </div>
+
+                    <button type="submit" class="btn subscrib-btnn" name="_submit" id="_submit" onclick="var GivenDate = document.getElementById('dat').value;
+                                                                                                        var CurrentDate = new Date();
+                                                                                                        GivenDate = new Date(GivenDate);
+                                                                                                        if( GivenDate <= CurrentDate){
+                                                                                                            alert('invalide!donner une date supérieure à la date courrante ');
+                                                                                                            return false;
+                                                                                                            }">Ajouter</button>
+                    <div class="checkout-right-basket">
+                        <a href="{{ path("show_MyEvent")}}">Annuler </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+{% block js %}
+    <script src="{{ asset('notif/lobibox.js') }}"></script>
+    <script src="{{ asset('datePicker.js') }}"></script>
+    <script>
+        function datecheck() {
+            var GivenDate = document.getElementById('dat').value;
+            var CurrentDate = new Date();
+            GivenDate = new Date(GivenDate);
+            if( GivenDate < CurrentDate){
+                alert('Given date is smaller than the current date.');
+            }return false
+
+        }
+
+        function validateForm(){
+
+            var date1 = $("#date").val();
+            var d1 = moment(date1, "YYYY-MM-DD").add(1, 'days');
+            var d3 = new Date();
+
+            if(d1 < d3)
+            {
+                alert("ghalet")
+                return false;
+            }
+            alert("shih")
+            return true ;
+
+        }
+    </script>
+{% endblock %}
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}

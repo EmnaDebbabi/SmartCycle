@@ -1,0 +1,11 @@
+{% extends 'FOSMessageBundle/layout.html.twig' %}
+
+{% block fos_message_content %}
+
+<h2 class="clr">{% trans from 'FOSMessageBundle' %}reçu(s){% endtrans %}</h2>
+
+<a href="{{ url('newthread_Event')}}">{% trans from 'FOSMessageBundle' %}envoyer un nouveau message{% endtrans %}</a>
+
+    <h5 class="clr text-left mb-lg-5  mb-3">{% include 'FOSMessageBundle/Message/threads_list.html.twig' with {'threads': threads} %}</h5>
+
+{% endblock %}

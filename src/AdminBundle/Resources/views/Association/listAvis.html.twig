@@ -1,0 +1,49 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+
+
+    <div class="bs-example widget-shadow" data-example-id="contextual-table">
+        <h3> Les avis des adhérents :</h3>
+        <table class="table">
+            <thead>
+            <tr >
+                <th>Membre</th>
+                <th>Association</th>
+                <th>avis</th>
+                <th>Répondre par email</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set i =0 %}
+            {% for d in demande  %}
+                {% if i % 2 == 1 %}
+                    {% set i=i+1 %}
+                    <tr class="info">
+
+                        <th >{{ d.idu.username }}</th>
+                        <th >{{ d.ida.nomAssociation }}</th>
+                        <th>{{ d.description }}</th>
+                        <td><a href="{{ path('asso_mail',{'id':d.id}) }}" onclick="return confirm('envoyer un mail ?')"><i class="fa fa-envelope"></i></a></td>
+
+                    </tr>
+                {% else %}
+                    {% set i=i+1 %}
+                    <tr class="success">
+                        <th >{{ d.idu.username }}</th>
+                        <th >{{ d.ida.nomAssociation }}</th>
+                        <th>{{ d.description }}</th>
+                        <td><a href="{{ path('asso_mail',{'id':d.id}) }}" onclick="return confirm('envoyer un email ?')"><i class="fa fa-envelope"></i></a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+{% endblock %}

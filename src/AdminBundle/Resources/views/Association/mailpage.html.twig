@@ -1,0 +1,29 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+
+
+    <div class="col-md-8 compose-right widget-shadow">
+        <div class="panel-default">
+            <div class="panel-heading">
+                Composer un nouveau message
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-info">
+                    remplire les champs s'il vous plait
+                </div>
+                <form class="com-mail" method="post">
+                    <input type="text" class="form-control1 control3" placeholder="To :" name="to" disabled="disabled" value="{{ rate.idu.email }}">
+                    <input type="text" class="form-control1 control3" placeholder="Subject :" name="subj">
+                    <textarea rows="6" class="form-control1 control2" placeholder="Message :" name="text"></textarea>
+
+                    <input type="submit" value="Send Message">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

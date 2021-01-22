@@ -1,0 +1,232 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+    <a href="/SymfonyPi/web/app_dev.php/admin/showEvent">
+        <button type="button" class="btn btn-primary"> Evénements</button>
+    </a>
+<a href="/SymfonyPi/web/app_dev.php/admin/TrierNom_Event">
+    <button type="button" class="btn btn-primary"> Trier par Nom</button>
+</a>
+    <a href="/SymfonyPi/web/app_dev.php/admin/TrierType_Event">
+        <button type="button" class="btn btn-primary"> Trier par Type</button>
+    </a>
+    <a href="/SymfonyPi/web/app_dev.php/admin/TrierLieu_Event">
+        <button type="button" class="btn btn-primary"> Trier par Lieu</button>
+    </a>
+    <div class="bs-example widget-shadow" data-example-id="contextual-table">
+        <h3> Tous les événements:</h3>
+
+        <table class="table">
+            {% if test==0 %}
+            <thead>
+            <tr >
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Lieu</th>
+                <th>Description</th>
+                <th>Heure</th>
+                <th>Image</th>
+                <th>Supprimer</th>
+                <th>Modifier</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set i =0 %}
+            {% for e in events  %}
+                {% if i % 2 == 1 %}
+                    {% set i=i+1 %}
+            {% if  e.date < datej  %}
+
+                <tr class="danger">
+
+                    <th >{{ e.nom }}</th>
+                    <th >{{ e.type }}</th>
+                    <th>{{e.date|date("m/d/y") }}</th>
+                    <th >{{ e.lieu }}</th>
+                    <th >{{ e.description }}</th>
+                    <th >{{ e.heure }}</th>
+                    <th><img src="{{ asset('imagesEvent/') }}{{ e.nomImage }}" style="width: 50px;height: 50px"></th>
+                    <td ><a href="{{ path("Remove_Event",{'id':e.id})}}" onclick="return confirm('Etes vous sur de supprimer cet produit?')"><i width="100px" class="fa fa-trash-o"></i></a></td>
+                    <td><a href="{{ path("Update_Event",{'id':e.id})}}" onclick="return confirm('Etes vous sur de modifier cet produit?')"><i class="fa fa-pencil-square-o"></i></a></td>
+                </tr>
+                {% else %}
+                    <tr class="info">
+
+                        <th >{{ e.nom }}</th>
+                        <th >{{ e.type }}</th>
+                        <th>{{e.date|date("m/d/y") }}</th>
+                        <th >{{ e.lieu }}</th>
+                        <th >{{ e.description }}</th>
+                        <th >{{ e.heure }}</th>
+                        <th><img src="{{ asset('imagesEvent/') }}{{ e.nomImage }}" style="width: 50px;height: 50px"></th>
+                        <td ><a href="{{ path("Remove_Event",{'id':e.id})}}" onclick="return confirm('Etes vous sur de supprimer cet produit?')"><i width="100px" class="fa fa-trash-o"></i></a></td>
+                        <td><a href="{{ path("Update_Event",{'id':e.id})}}" onclick="return confirm('Etes vous sur de modifier cet produit?')"><i class="fa fa-pencil-square-o"></i></a></td>
+                    </tr>
+            {% endif %}
+                {% else %}
+                    {% set i=i+1 %}
+            {% if  e.date < datej  %}
+                <tr class="danger">
+
+                    <th >{{ e.nom }}</th>
+                    <th >{{ e.type }}</th>
+                    <th>{{e.date|date("m/d/y") }}</th>
+                    <th >{{ e.lieu }}</th>
+                    <th >{{ e.description }}</th>
+                    <th >{{ e.heure }}</th>
+                    <th><img src="{{ asset('imagesEvent/') }}{{ e.nomImage }}" style="width: 50px;height: 50px"></th>
+                    <td ><a href="{{ path("Remove_Event",{'id':e.id})}}" onclick="return confirm('Etes vous sur de supprimer cet produit?')"><i width="100px" class="fa fa-trash-o"></i></a></td>
+                    <td><a href="{{ path("Update_Event",{'id':e.id})}}" onclick="return confirm('Etes vous sur de modifier cet produit?')"><i class="fa fa-pencil-square-o"></i></a></td>
+                </tr>
+            {% else %}
+                    <tr class="success">
+                        <th >{{ e.nom }}</th>
+                        <th >{{ e.type }}</th>
+                        <th>{{e.date|date("m/d/y") }}</th>
+                        <th >{{ e.lieu }}</th>
+                        <th >{{ e.description }}</th>
+                        <th >{{ e.heure }}</th>
+                        <th><img src="{{ asset('imagesEvent/') }}{{ e.nomImage }}" style="width: 50px;height: 50px"></th>
+                        <td ><a href="{{ path("Remove_Event",{'id':e.id})}}" onclick="return confirm('Etes vous sur de supprimer cet produit?')"><i width="100px" class="fa fa-trash-o"></i></a></td>
+                        <td><a href="{{ path("Update_Event",{'id':e.id})}}" onclick="return confirm('Etes vous sur de modifier cet produit?')"><i class="fa fa-pencil-square-o"></i></a></td>
+                    </tr>
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+            <tr>
+                {% endif %}
+                {% if test==1 %}
+                   <thead>
+                   <tr>
+                <th>Nom</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% set i =0 %}
+            {% for e in events  %}
+                {% if i % 2 == 1 %}
+                    {% set i=i+1 %}
+                    {% if  e.date < datej  %}
+                        <tr class="danger">
+
+                            <th >{{ e.nom }}</th>
+
+                        </tr>
+                    {% else %}
+                        <tr class="info">
+
+
+                        </tr>
+                    {% endif %}
+                {% else %}
+                    {% set i=i+1 %}
+                    {% if  e.date < datej  %}
+                        <tr class="danger">
+
+                            <th >{{ e.nom }}</th>
+
+                        </tr>
+                    {% else %}
+                        <tr class="success">
+                            <th >{{ e.nom }}</th>
+
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <tr>
+                {% endif %}
+                {% if test==2 %}
+            <thead>
+            <tr>
+                <th>Type</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% set i =0 %}
+            {% for e in events  %}
+                {% if i % 2 == 1 %}
+                    {% set i=i+1 %}
+                    {% if  e.date < datej  %}
+                        <tr class="danger">
+
+                            <th >{{ e.type }}</th>
+
+                        </tr>
+                    {% else %}
+                        <tr class="info">
+
+
+                        </tr>
+                    {% endif %}
+                {% else %}
+                    {% set i=i+1 %}
+                    {% if  e.date < datej  %}
+                        <tr class="danger">
+
+                            <th >{{ e.type }}</th>
+
+                        </tr>
+                    {% else %}
+                        <tr class="success">
+                            <th >{{ e.type }}</th>
+
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <tr>
+                {% endif %}
+                {% if test==3 %}
+            <thead>
+            <tr>
+                <th>Lieu</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% set i =0 %}
+            {% for e in events  %}
+                {% if i % 2 == 1 %}
+                    {% set i=i+1 %}
+                    {% if  e.date < datej  %}
+                        <tr class="danger">
+
+                            <th >{{ e.lieu }}</th>
+
+                        </tr>
+                    {% else %}
+                        <tr class="info">
+
+
+                        </tr>
+                    {% endif %}
+                {% else %}
+                    {% set i=i+1 %}
+                    {% if  e.date < datej  %}
+                        <tr class="danger">
+
+                            <th >{{ e.lieu }}</th>
+
+                        </tr>
+                    {% else %}
+                        <tr class="success">
+                            <th >{{ e.lieu }}</th>
+
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+{% endblock %}

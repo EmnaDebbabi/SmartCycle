@@ -1,0 +1,100 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="{{ path('user_homepage') }}">Accueil Smart Cycle</a>
+                    <span>/</span>
+                </li>
+                <li>Donation</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+
+
+    {{ form_start(form) }}
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">ajouter vos déchets !</h3>
+
+        <div class="col-md address_form">
+            <div class=" checkout-left-basket">
+                <br>
+                <h4> <a href="{{ path('produit_index') }}" class="link-product-add-cart">gerer mes produit</a></h4>
+                <br>
+            </div>
+        </div>
+        <div class="contact-list-grid">
+
+            <form action="#" method="post">
+                <div class=" agile-wls-contact-mid">
+                    <div class="form-group contact-forms">
+                        {{ form_widget(form.nomproduit,{'attr':{'class':'form-control','placeholder':"Saisir le nom de produit" }}) }}
+
+                    </div>
+
+                    <div class="form-group contact-forms">
+                        {{  form_widget(form.typeproduit,{'attr':{'class':'form-control','placeholder':"type de produit" }}) }}
+                    </div>
+                    <div class="form-group contact-forms">
+                        {{ form_widget(form.quantiteproduit,{'attr':{'class':'form-control','placeholder':"quantiteproduit" }}) }}
+
+                    </div>
+
+                    <div class="form-group contact-forms">
+                        {{  form_widget(form.description,{'attr':{'class':'form-control','placeholder':"decription" }}) }}
+
+                    </div>
+
+
+                    <div class="form-group contact-forms">
+                        {{ form_widget(form.file) }}
+                        {{ form_errors(form.file) }}
+                    </div>
+
+
+
+                    <input class="btn btn-success" type="submit" value="Ajouter" />
+
+
+
+
+                </div>
+            </form>
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+{% endblock %}
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}

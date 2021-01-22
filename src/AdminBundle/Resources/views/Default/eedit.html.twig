@@ -1,0 +1,47 @@
+{% extends "@Admin/Default/index.html.twig" %}
+{% block body %}
+    {{ form_start(edit_form) }}
+
+    <table align="center">
+        <tr>
+            <td>Nom</td>
+            <td>{{ form_widget(edit_form.nom) }}</td>
+        </tr>
+        <tr>
+            <td>Prenom</td>
+            <td>{{ form_widget(edit_form.prenom) }}</td>
+        </tr>
+        <tr>
+            <td>Cin</td>
+            <td>{{ form_widget(edit_form.cin) }}</td>
+        </tr>
+        <tr>
+            <td>Adresse</td>
+            <td>{{ form_widget(edit_form.adresse) }}</td>
+        </tr>
+        <tr>
+            <td> Telephone</td>
+            <td>{{ form_widget(edit_form.telephone) }}</td>
+        </tr>
+        <tr>
+            <td>Permit</td>
+            <td>{{ form_widget(edit_form.permit) }}</td>
+        </tr>
+        <tr>
+            <td> {{ form_widget(edit_form.save) }}</td>
+        </tr>
+
+
+    </table>
+
+
+
+
+
+
+    {{ form_end(edit_form) }}
+
+
+
+
+{% endblock %}

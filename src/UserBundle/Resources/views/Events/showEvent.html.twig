@@ -1,0 +1,246 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="{{ path('user_homepage') }}">Index</a>
+                    <span>/</span>
+                </li>
+                <li>Les Evénements</li>
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block body %}
+    <section class="contact py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container-fluid py-lg-5 py-md-4 py-sm-4 py-3">
+            <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Tous les événements</h3>
+            <div class="row">
+                <div class="side-bar col-lg-3">
+                    <div class="search-hotel">
+                        <h3 class="agileits-sear-head">Rechercher ici..</h3>
+
+                        <input type="search" placeholder="Taper votre recherche ici..." id="search">
+                    </div>
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            
+                            <ul class="nav nav" id="entitiesNav3"></ul>
+
+                        </li>
+                        <div class="range">
+
+
+                            {#<a href="{{ path("show_MyParticipation")}}" id="participer" class="link-product-add-cart">consulter ma participation</a>#}
+                            <button class="btn btn-block sent-butnn" onclick="location.href='{{ path('show_MyParticipation') }}'" >consulter ma participation</button>
+
+
+
+                            {#<a href="{{ path("Chart_Event")}}" id="participer" class="link-product-add-cart">Les événements les plus populaires</a>#}
+                            <button class="btn btn-block sent-butnn" onclick="location.href='{{ path('Chart_Event') }}'" >Les plus populaires</button>
+
+
+
+                            {#<a href="{{ path("Proposition_Event")}}" id="participer" class="link-product-add-cart">Messenger<span class="fas fa-envelope"></span></a>#}
+                            <button class="btn btn-block sent-butnn" onclick="location.href='{{ path('Proposition_Event') }}'" >Messenger</button>
+
+
+
+                    </ul>
+                </div>
+
+
+
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+                <script type="text/javascript">
+                    jQuery(document).ready(function() {
+                        var searchRequest = null;
+                        $("#search").keyup(function() {
+                            var minlength = 1;
+                            var that = this;
+                            var value = $(this).val();
+                            var entitySelector = $("#entitiesNav").html('');
+                            if (value.length >= minlength ) {
+                                if (searchRequest != null)
+                                    searchRequest.abort();
+                                searchRequest = $.ajax({
+                                    type: "GET",
+                                    url: "{{ path('ajax_search') }}",
+                                    data: {
+                                        'q' : value
+                                    },
+                                    dataType: "text",
+                                    success: function(msg){
+                                        //we need to check if the value is the same
+                                        if (value===$(that).val()) {
+                                            var result = JSON.parse(msg);
+                                            $.each(result, function(key, arr) {
+                                                $.each(arr, function(id, value) {
+                                                    if (key === 'posts') {
+                                                        if (id !== 'error') {
+                                                            console.log(value[1]);
+                                                            entitySelector.append('<div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">'+
+                                                                '<div class="product-toys-info"><div class="men-pro-item"><div class="men-thumb-item">'+
+                                                                '<img src="/SymfonyPi/web/imagesEvent/'+value[0]+'" class="img-thumbnail img-fluid" alt=""/>'+
+                                                                '<div class="men-cart-pro"><div class="inner-men-cart-pro">'+
+                                                                '<a href="/SymfonyPi/web/app_dev.php/user/add_Participant/'+id+'"class="link-product-add-cart">'+'Participer'+'</a>'+
+                                                                ' </div></div><span class="product-new-top">type</span></div><div class="item-info-product">'+
+                                                                '<div class="info-product-price"><div class="grid_meta"><div class="product_price"><h4><a href="single.html">'+
+                                                                value[1]+' </a></h4>'+
+                                                                '</div><ul class="stars"><li>Rating :</li><li><a href="#"><i class="fas fa-star"></i>'+
+                                                                '</a></li></ul> </div><div class="toys single-item hvr-outline-out">'+
+                                                                '<form action="#" method="post"><input type="hidden" name="cmd" value="_cart">'+
+                                                                '<input type="hidden" name="add" value="1"><input type="hidden" name="toys_item" value="toys(barbie)">'+
+                                                                '<input type="hidden" name="amount" value="575.00"></form> </div></div><div class="clearfix"></div>'+
+                                                                '</div></div></div></div>'
+
+
+                                                            );
+                                                        } else {
+                                                            entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                        }
+                                                    }
+                                                });
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    });
+                </script>
+
+
+                    <div class="left-ads-display col-lg-9">
+                        {% if events|length == 0 %}
+                            <tr>
+                                <h1> <td colspan="7"><center>Il y a aucun événement!</center></td></h1>
+                            </tr>
+                        {% endif %}
+                    <div class="row" id="entitiesNav">
+                        {% set i =0 %}
+                            {% for event in events  %}
+                                {% set i=i+1 %}
+                                <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+
+                                    <div class="product-toys-info">
+                                        <div class="men-pro-item">
+                                            <div class="men-thumb-item">
+                                                <img src="{{ asset('imagesEvent/') }}{{ event.nomImage }} " style="width: 260px;height: 240px" class="img-thumbnail img-fluid" alt="">
+                                                <div class="men-cart-pro">
+
+                                                    {{ MessageEvent  }}
+                                                    <div class="inner-men-cart-pro">
+
+                                                        <a href="{{ path("add_Participant",{'id':event.id})}}" id="participer" class="link-product-add-cart">participer</a>
+
+                                                    </div>
+
+                                                </div>
+                                                <span class="product-new-top">{{ event.type }}</span>
+                                            </div>
+                                            <div class="item-info-product">
+                                                <div class="info-product-price">
+                                                    <div class="grid_meta">
+                                                        <div class="product_price">
+                                                            <h4>
+                                                                <a href="single.html">{{ event.nom }}</a>
+                                                            </h4>
+                                                            <div class="grid-price mt-2">
+                                                                <span class="money ">{{event.date|date("m/d/y") }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <ul class="stars">
+                                                            <li>Rating :</li>
+                                                            {% if rates[i-1] == 0 %}
+                                                                aucun vote encore !
+                                                            {% endif %}
+
+                                                            {% if rates[i-1] != 0 %}
+                                                                {% for j in 1..rates[i-1]  %}
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fas fa-star"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                {% endfor %}
+                                                            {% endif %}
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="toys single-item hvr-outline-out">
+                                                        <form action="{{ path("Detail_Event",{'id':event.id})}}" method="post">
+                                                            <input type="hidden" name="cmd" value="_cart">
+                                                            <input type="hidden" name="add" value="1">
+                                                            <input type="hidden" name="toys_item" value="toys(barbie)">
+                                                            <input type="hidden" name="amount" value="575.00">
+                                                            <button type="submit" class="toys-cart ptoys-cart">
+                                                                <i class="fas far fa-sign-in-alt">
+
+                                                                </i>
+
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            {% endfor %}
+
+
+
+                            <div class="clearfix"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    </section>
+    {{ knp_pagination_render(events,'@User/Paginator/pagination.html.twig') }}
+{% endblock %}
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}

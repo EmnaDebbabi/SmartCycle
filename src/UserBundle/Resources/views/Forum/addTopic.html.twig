@@ -1,0 +1,93 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="{{ path('user_homepage') }}">Smart Cycle Accueil </a>
+                    <span>/ /</span>
+                </li>
+                <li>Blog</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+
+    {{ form_start(form) }}
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Ajouter mon Sujet </h3>
+        <div class="contact-list-grid">
+            <form action="#" method="post">
+                <div class=" agile-wls-contact-mid">
+
+                    <div class="form-group contact-forms">
+                        <label class="control-label">Titre du sujet </label>
+                        {{ form_widget(form.topicTitle,{'attr':{'class':'form-control','placeholder':"Saisir le nom du sujet"}}) }}
+                    </div>
+
+                    <div class="form-group contact-forms">
+                        <label class="control-label">Contenue du sujet </label>
+                        {{ form_widget(form.topicSubject,{'attr':{'class':'form-control','placeholder':"Saisir le contenue du sujet"}}) }}
+                    </div>
+
+
+                    <div class="form-group contact-forms">
+                        <label class="control-label">Categorie de sujet </label>
+
+                         <div>   {{ form_widget(form.topicCat,{'attr':{'class':'form-control','placeholder':"Choix de la categorie "}}) }} </div>
+
+
+
+
+                    </div>
+
+                    <div class="form-group contact-forms">
+                        <label class="control-label">Photo à ajouter </label>
+                        {{ form_widget(form.file) }}
+                        {{ form_errors(form.file) }}
+                    </div>
+                    <button type="submit" class="btn subscrib-btnn" name="_submit" id="_submit">Ajouter</button>
+                    <div class="checkout-right-basket">
+                        <a href="{{ path("listTopic")}}">Annuler </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+
+
+
+
+{% endblock %}

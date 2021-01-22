@@ -1,0 +1,31 @@
+
+<div align="center">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-two">Membres de SmartCycle</button>
+</div>
+<div class="modal fade" id="exampleModal-two" tabindex="-1" role="dialog" aria-labelledby="exampleModal-twoLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal-twoLabel">les membres connectés </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <combobox placeholder="pourquoi cette note" class="form-control" rows="3" name="description">
+
+                    {% for user in users  %}
+                        <ul>
+                       {{ user.nom }}
+                        </ul>
+                    {% endfor %}
+                </combobox>
+                {#{{ form_widget(form.description,{'attr':{'placeholder':"votre texte ..." }}) }}#}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                {#<button type="submit" class="btn btn-primary">enregitrer</button>#}
+            </div>
+        </div>
+    </div>
+</div>

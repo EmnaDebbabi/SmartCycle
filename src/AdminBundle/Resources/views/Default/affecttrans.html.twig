@@ -1,0 +1,51 @@
+{% extends "@Admin/Default/index.html.twig" %}
+{% block body %}
+
+    <center>
+
+        <div class="table-responsive bs-example widget-shadow">
+            <h1>Transporteurs pour votre Mession</h1>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col" hidden>Id Transporteur</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Adresse</th>
+                    <th>cin</th>
+                    <th>Telephone</th>
+                    <th>Permit</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for c in transports %}
+                    <tr>
+                        <td hidden>{{ c.id  }}</a></td>
+                        <td>{{ c.nom }}</td>
+                        <td>{{ c.prenom }}</td>
+                        <td>{{ c.cin }}</td>
+                        <td>{{ c.adresse }}</td>
+                        <td>{{ c.telephone }}</td>
+                        <td>{{ c.permit }}</td>
+                        <td>
+                            <a href="{{ path('mession_index', { 'id': c.id })  }}" ><button class="btn btn-primary"> <i class="fa fa-edit" ></i> valider </button></a>
+                        </td>
+
+                    </tr>
+
+
+
+
+
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+    </center>
+
+{% endblock %}

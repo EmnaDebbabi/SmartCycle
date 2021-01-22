@@ -1,0 +1,25 @@
+{% extends 'FOSMessageBundle/layout.html.twig' %}
+
+{% block fos_message_content %}
+
+{#<h2>{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</h2>#}
+
+<form action="{{ url('newthread_Event') }}" method="post">
+    {{ form_widget(form) }}
+        <div class="form-group sub-info-mail">
+            {#{{ form_widget(form.recipient,{'attr':{'class':'form-control','placeholder':"Saisir le recipient" }}) }}#}
+        </div>
+    <div class="form-group sub-info-mail">
+        {#{{ form_widget(form.subject,{'attr':{'class':'form-control','placeholder':"Saisir votre sujet" }}) }}#}
+    </div>
+    <div class="form-group sub-info-mail">
+        {#{{ form_widget(form.body,{'attr':{'class':'form-control','placeholder':"Saisir votre texte" }}) }}#}
+    </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn subscrib-btnn">Envoyer</button>
+        </div>
+
+</form>
+
+{% endblock %}

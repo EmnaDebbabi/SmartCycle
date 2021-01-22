@@ -1,0 +1,134 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="{{ path('user_homepage') }}">Index</a>
+                    <span>/</span>
+                </li>
+                <li>Bienvenu </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+    <br><br><br><br><br><br><br>
+    <section class="contact py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container-fluid py-lg-5 py-md-4 py-sm-4 py-3">
+            <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Tous nos produits</h3>
+            <div class="row">
+                <div class="side-bar col-lg-3">
+                    <div class="search-hotel">
+                        <h3 class="agileits-sear-head">Search Here..</h3>
+                        <form action="#" method="post">
+                            <input type="search" placeholder="Product name..." name="search" required="">
+                            <input type="submit" value=" ">
+                        </form>
+                    </div>
+                    <!-- price range -->
+
+                    <!-- //price range -->
+
+                    <!-- // preference -->
+                    <!-- discounts -->
+                    <div class="left-side">
+                        <h3 class="agileits-sear-head">gerer vos produit</h3>
+                        <ul>
+                            <li>
+                                <a href="{{ path('produit_new') }}" class="link-product-add-cart">ajouter un produit</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('produit_index') }}" class="link-product-add-cart">modifier/supprimer</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-- //discounts -->
+
+                    <!-- //reviews -->
+
+                </div>
+                <div class="left-ads-display col-lg-9">
+                    <div class="row">
+{%  for i in produits %}
+                        <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+                            <div class="product-toys-info">
+                                <div class="men-pro-item">
+                                    <div class="men-thumb-item">
+
+                                        <img src="{{ asset('uploads/photos/334ec78a5f2eda351c5babc8c8f300c1.jpeg') }}" class="img-thumbnail" alt="">
+                                        <div class="men-cart-pro">
+                                            <div class="inner-men-cart-pro">
+                                                <a href="#" class="link-product-add-cart">Quick View</a>
+                                            </div>
+                                        </div>
+                                        <span class="product-new-top">Nouveau</span>
+                                    </div>
+                                    <div class="item-info-product">
+                                        <div class="info-product-price">
+                                            <div class="grid_meta">
+                                                <div class="product_price">
+                                                    <h4>
+                                                        <a href="single.html">{{ i.nomproduit }}</a>
+                                                    </h4>
+                                                    <div class="grid-price mt-2">
+                                                        <span class="money ">{{ i.typeproduit.type }}</span>
+                                                    </div>
+                                                    <div class="grid-price mt-2">
+                                                        <span class="money ">{{ i.quantiteproduit }}</span>
+                                                    </div>
+                                                    <div class="grid-price mt-2">
+                                                        <span class="money ">{{ i.dat }}</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="toys single-item hvr-outline-out">
+                                                <span class="money ">{{ i.status }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}

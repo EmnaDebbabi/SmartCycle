@@ -1,0 +1,113 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+
+
+    {{ form_start(form) }}
+    <div class="col-md-6 validation-grids widget-shadow" data-example-id="basic-forms">
+        <div class="form-title">
+            <h4>Modifier événement:</h4>
+        </div>
+        <div class="form-body">
+            <form data-toggle="validator" novalidate="true">
+
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-sm-12">
+                        <label>Nom</label>
+                    </div>
+                    <div class="col-md-9 col-lg-9 col-sm-12">
+                        {{ form_widget(form.nom) }}
+                        {{ form_errors(form.nom) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-sm-12">
+                        <label>Type</label>
+                    </div>
+                    <div class="col-md-9 col-lg-9 col-sm-12">
+
+
+                        {{ form_widget(form.type) }}
+                        {{ form_errors(form.type) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-sm-12">
+                        <label>Date</label>
+                    </div>
+                    <div class="col-md-9 col-lg-9 col-sm-12">
+                        {#{{ form_widget(form.date) }}#}
+                        {#{{ form_errors(form.date) }}#}
+                        <input type="date"   name="date" id="dat" value="{{ fot}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-sm-12">
+                        <label>Lieu</label>
+                    </div>
+                    <div class="col-md-9 col-lg-9 col-sm-12">
+                        {{ form_widget(form.lieu) }}
+                        {{ form_errors(form.lieu) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-sm-12">
+                        <label>Description</label>
+                    </div>
+                    <div class="col-md-9 col-lg-9 col-sm-12">
+                        {{ form_widget(form.description) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-sm-12">
+                        <label>Heure</label>
+                    </div>
+                    <div class="col-md-9 col-lg-9 col-sm-12">
+                        {{ form_widget(form.heure) }}
+                        {{ form_errors(form.heure) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-sm-12">
+                        <label>Image</label>
+                    </div>
+                    <div class="col-md-9 col-lg-9 col-sm-12">
+                        {{ form_widget(form.file) }}
+                        {{ form_errors(form.file) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-sm-12">
+
+                        <button type="submit" class="btn btn-default">Enregistrer</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+
+    <div>
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+
+            <div class="alert alert-danger">
+                {{ flashMessage }}
+            </div>
+
+        {% endfor %}
+    </div>
+
+    {% for label, messages in app.flashes(['warning', 'error']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+
+{% endblock%}

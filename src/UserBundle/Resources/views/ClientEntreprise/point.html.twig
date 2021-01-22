@@ -1,0 +1,73 @@
+{% extends "@User/Default/index.html.twig" %}
+{% block slide %}
+    <div class="inner_page-banner one-img">
+    </div>
+    <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+                <li>
+                    <a href="{{ path('user_homepage') }}">Smart Cycle Accueil </a>
+                    <span>/ /</span>
+                </li>
+                <li>Mes Points </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+    <section class="about py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+
+            <div class="about-innergrid-agile text-center">
+                <h4>Votre Points : {{ point }} point(s)</h4>
+                <h5>Vous pouvez gagner avec Smart Cycle de Kilos gratuit </h5>
+                <br>
+               <h5>Lors d'atteindre les 100 points ! Vous allez gagner 5 kilos gratuits</h5>
+                <br>
+                <h6>Avec chaque 100 DT payés ! Vous recevrez 10 points </h6>
+
+                <p class="mb-3"></p>
+
+                <a href="{{ path('accederaumoncadeaux') }}"  class="link-product-add-cart">Accéder au mon cadeaux</a>
+
+                <div class=" img-toy-w3l-top">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block login %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+
+    <a href="{{ path('categorie_ajout') }}"><button type="button" class="btn btn-primary">  Ajouter Categorie</button></a>
+    <a href="{{ path('produit_show') }}"><button type="button" class="btn btn-primary">  Afficher les Recyclables</button></a>
+
+    <div class="bs-example widget-shadow" data-example-id="contextual-table">
+
+
+
+
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom de Categorie</th>
+                <th>Type de Categorie</th>
+                <th>Image de Categorie</th>
+                <th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr class="active">
+                {% for c in categories%}
+                <th scope="row">1</th>
+
+
+                <td>{{ c.nomcategorie }}</td>
+                <td>{{ c.type }}</td>
+                <td><img src=" {{ asset('imageProduits/') }}{{ c.nomImage }}" height="70px" alt=""></td>
+                <td>
+                    <a href="{{ path('categorie_edit', { 'id': c.id }) }}"><button class="btn btn-primary"> <i class="fa fa-edit" ></i> edit  </button></a>
+                </td>
+                <td>
+                    <a href="{{ path('categorie_delete', { 'id': c.id }) }}"> <button class="btn btn-danger"> <i class="fa fa-trash" ></i> Delete</button></a>
+                </td>
+            </tr>
+                {% endfor %}
+            </tbody>
+
+
+        </table>
+    </div>
+    <center>
+    <div class="navigation">
+        {{ knp_pagination_render(categories) }}
+    </div>
+    </center>
+
+
+
+{% endblock %}

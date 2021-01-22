@@ -1,0 +1,49 @@
+{% extends "@Admin/Default/index.html.twig" %}
+
+{% block body %}
+
+
+    <div class="bs-example widget-shadow" data-example-id="contextual-table">
+        <h3> Liste de Ctégories :</h3>
+        <table class="table">
+            <thead>
+            <tr >
+                <th>Nom de la catégorie</th>
+                <th>Description</th>
+                <th>Supprimer</th>
+                <th>Modifier</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set i =0 %}
+            {% for s in Categorietopics  %}
+                {% if i % 2 == 1 %}
+                    {% set i=i+1 %}
+                    <tr class="info">
+
+                        <th >{{ s.catName }}</th>
+                        <th >{{ s.catDescription }}</th>
+                        <td ><a href="{{ path('supprimerCategorie',{'catId':s.catId}) }}" onclick="return confirm('Etes vous sur de supprimer cet produit?')"><i width="100px" class="fa fa-trash-o"></i></a></td>
+                        <td><a href="{{ path('modifierCategorie',{'catId':s.catId}) }}" onclick="return confirm('Etes vous sur de modifier cet produit?')"><i class="fa fa-pencil-square-o"></i></a></td>
+                    </tr>
+                {% else %}
+                    {% set i=i+1 %}
+                    <tr class="success">
+
+                        <th >{{ s.catName }}</th>
+                        <th >{{ s.catDescription }}</th>
+                        <td ><a href="{{ path('supprimerCategorie',{'catId':s.catId}) }}" onclick="return confirm('Etes vous sur de supprimer cet produit?')"><i width="100px" class="fa fa-trash-o"></i></a></td>
+                        <td><a href="{{ path('modifierCategorie',{'catId':s.catId}) }}" onclick="return confirm('Etes vous sur de modifier cet produit?')"><i class="fa fa-pencil-square-o"></i></a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+{% endblock %}
